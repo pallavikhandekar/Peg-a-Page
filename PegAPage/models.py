@@ -13,6 +13,6 @@ class Bookmark(models.Model):
     link = models.ForeignKey(UrlLink)
 
            
-#class Tag(models.Model):
-#    name = models.CharField(maxlength=64, unique=True)
-#    bookmarks = models.ManyToManyField(Bookmark)
+class Peg(models.Model):
+    name = models.CharField(max_length=64, unique=True)
+    bookmarks = models.ManyToManyField(Bookmark)
