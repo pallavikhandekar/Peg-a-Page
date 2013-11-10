@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Peg A Page</title>
+</head>
+<body>
+<div style="background-color:#A7EEF6">
+  <h1 align="center">Peg A Page
+  <img align="right" src="http://designsinmylocket.files.wordpress.com/2012/12/smiley-face.jpg" height="42" width="42"></img>
+</h1>
+</div>
+<h4 align="right">Welcome pallavi</h4>
+	{% load staticfiles %}
+		<a>
+        <img name="imgAddPeg" border="0" src="{% static "images/Add_Pin_Text.jpeg" %}" width="150" height="150">
+        </a>
+    {% for x in listx %}
+        <a>
+        <img name="impPeg" border="0" src="{% static "images/Aqua_Pin.jpg" %}" width="150" height="150">
+        </a>
+    {% endfor %}
+</body>
+</html>
