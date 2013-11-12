@@ -12,13 +12,24 @@
 </div>
 <h4 align="right">Welcome pallavi</h4>
 	{% load staticfiles %}
+	<table>
+		<tr align="center">
+			<td align="center">
+			 <a>
+      			  <img name="imgAddPeg" border="0" src="{% static "images/Add_Pin_Text.png" %}" width="200" height="200">
+       		 </a>
+			</td>
+		</tr>
+		{% for bookmark in bookmarks %}
+		<tr>
+		<td>
 		<a>
-        <img name="imgAddPeg" border="0" src="{% static "images/Add_Pin_Text.png" %}" width="150" height="150">
-        </a>
-    {% for x in listx %}
-        <a>
-        <img name="impPeg" border="0" src="{% static "images/Aqua_Pin.png" %}" width="150" height="150">
-        </a>
-    {% endfor %}
+		<img name="impPeg" border="0" src="{% static "images/Aqua_Pin.png" %}" width="200" height="200"><br/>
+        {{bookmark.bookmarkname}}
+		</a>
+		</td>
+		</tr>
+		{% endfor %}
+	</table>
 </body>
 </html>

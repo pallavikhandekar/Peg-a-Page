@@ -5,7 +5,7 @@ Contains all forms
 '''
 
 from django import forms
-
+from Tkinter import *
 
 class BookmarkSaveForm(forms.Form):
     url = forms.URLField(
@@ -21,3 +21,7 @@ class BookmarkSaveForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'size': 64})
     )
+    def browse(self):
+        print "browse"
+    btnBrowse = Button(text='Browse',command= browse).pack()
+    

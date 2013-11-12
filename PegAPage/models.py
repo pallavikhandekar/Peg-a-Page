@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 class UrlLink(models.Model):
     url = models.URLField(unique=True)
-   
 
 class Bookmark(models.Model):
     bookmarkname = models.CharField(max_length=200)
