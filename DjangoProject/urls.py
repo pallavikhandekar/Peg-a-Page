@@ -5,4 +5,5 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-                       (r'^DjangoProject/', 'PegAPage.views.load'),)
+                       (r'^DjangoProject/', 'PegAPage.views.load'),
+                       (r'^save/$', 'PegAPage.views.bookmark_save_page'),)
