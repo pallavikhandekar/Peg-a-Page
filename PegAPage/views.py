@@ -13,6 +13,7 @@ def bookmark_save_page(request):
     if request.method == 'POST':
         form = BookmarkSaveForm(request.POST)
         if form.is_valid():
+            print "VALID"
             # Create or get link.
             link, dummy = UrlLink.objects.get_or_create(
             url=form.cleaned_data['url']
@@ -33,14 +34,20 @@ def bookmark_save_page(request):
                 bookmark.peg_set.add(peg)
             # Save bookmark to database.
             bookmark.save()
-            bookmarks = Bookmark.objects.filter(user_id=1)
-            listofbookmarks = [bk for bk in bookmarks] 
-            return render(request,'CRUDPeg.html',{'bookmarks':listofbookmarks})
+            print "Save called"
+            return HttpResponse("Peg Saved")
         else:
-            return HttpResponse("Cannot be blank")
+            print "INVALID"
+            form = BookmarkSaveForm()
+            variables = RequestContext(request, {'form': form})
+            return render_to_response('bookmark_save.html', variables)
     else:
+        print "VALID LOad"
         form = BookmarkSaveForm()
         variables = RequestContext(request, {'form': form})
         return render_to_response('bookmark_save.html', variables)
     
-    
+def loadPeg(request):
+    bookmarks = Bookmark.objects.filter(user_id=1)
+    listofbookmarks = [bk for bk in bookmarks] 
+    return render(request,'CRUDPeg.html',{'bookmarks':listofbookmarks})

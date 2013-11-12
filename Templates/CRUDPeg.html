@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Peg A Page</title>
+ <script type="text/javascript">
+       
+        function loadSaveForm()
+        {
+        l=(screen.width-500)/2;
+		t=(screen.height-500)/2;
+        
+            window.open("/save/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+            return false;
+        }
+  </script>
 </head>
 <body>
 <div style="background-color:#A7EEF6">
@@ -11,12 +22,14 @@
 </h1>
 </div>
 <h4 align="right">Welcome pallavi</h4>
+<form id="crudPeg" action="/createPeg/" method="post">
+{% csrf_token %}
 	{% load staticfiles %}
 	<table>
 		<tr align="center">
 			<td align="center">
 			 <a>
-      			  <img name="imgAddPeg" border="0" src="{% static "images/Add_Pin_Text.png" %}" width="200" height="200">
+      			  <img name="imgAddPeg" border="0" src="{% static "images/Add_Pin_Text.png" %}" width="200" height="200" onclick="loadSaveForm()">
        		 </a>
 			</td>
 		</tr>
@@ -31,5 +44,6 @@
 		</tr>
 		{% endfor %}
 	</table>
+	</form>
 </body>
 </html>
