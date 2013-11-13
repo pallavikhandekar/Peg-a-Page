@@ -13,6 +13,16 @@
             window.open("/Pegs/createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
             return false;
         }
+        
+        function loadCreateBoard()
+        {
+        l=(screen.width-500)/2;
+		t=(screen.height-500)/2;
+        
+            window.open("/Pegs/createboard/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+            return false;
+        }
+        
   </script>
 </head>
 <body>
@@ -30,6 +40,11 @@
 			<td align="center">
 			 <a>
       			  <img name="imgAddPeg" border="0" src="{% static "images/Add_Pin_Text.png" %}" width="200" height="200" onclick="loadSaveForm()">
+       		 </a>
+			</td>
+			<td align="center">
+			 <a>
+      			  <img name="bulletin-board3" border="0" src="{% static "images/bulletin-board3.jpg" %}" width="200" height="200" onclick="loadCreateBoard()>
        		 </a>
 			</td>
 		</tr>
