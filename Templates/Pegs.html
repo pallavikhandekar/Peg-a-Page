@@ -13,7 +13,27 @@
             window.open("/Pegs/createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
             return false;
         }
+        
+        function test()
+        {
+         alert("Hello Edit")
+        }
   </script>
+  
+<style type="text/css">
+div
+{
+position:relative;
+display:inline;
+}
+.imtip
+{
+position:absolute;
+right:0;
+}
+</style>
+
+ 
 </head>
 <body>
 <div style="background-color:#A7EEF6">
@@ -37,8 +57,13 @@
 		<tr>
 		<td>
 		<a>
+		<figure>
+		<div>
+		<img name="editIcon" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="test()">
 		<img name="impPeg" border="0" src="{% static "images/Aqua_Pin.png" %}" width="200" height="200"><br/>
-        {{bookmark.bookmarkname}}
+		</div>
+		<figcaption align="center">{{bookmark.bookmarkname}}</figcaption>
+		</figure>
 		</a>
 		</td>
 		</tr>
