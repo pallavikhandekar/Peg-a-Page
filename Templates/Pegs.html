@@ -14,6 +14,7 @@
             return false;
         }
         
+<<<<<<< HEAD
         function loadCreateBoard()
         {
         l=(screen.width-500)/2;
@@ -23,7 +24,28 @@
             return false;
         }
         
+=======
+        function test()
+        {
+         alert("Hello Edit")
+        }
+>>>>>>> 0935fb75bfb40e5aeea28acaf6050ba436077dac
   </script>
+  
+<style type="text/css">
+div
+{
+position:relative;
+display:inline;
+}
+.imtip
+{
+position:absolute;
+right:0;
+}
+</style>
+
+ 
 </head>
 <body>
 <div style="background-color:#A7EEF6">
@@ -52,8 +74,13 @@
 		<tr>
 		<td>
 		<a>
+		<figure>
+		<div>
+		<img name="editIcon" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="test()">
 		<img name="impPeg" border="0" src="{% static "images/Aqua_Pin.png" %}" width="200" height="200"><br/>
-        {{bookmark.bookmarkname}}
+		</div>
+		<figcaption align="center">{{bookmark.bookmarkname}}</figcaption>
+		</figure>
 		</a>
 		</td>
 		</tr>

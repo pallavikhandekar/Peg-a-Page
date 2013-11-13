@@ -6,7 +6,7 @@ from django.http.response import HttpResponse
 # Create your views here.
 def load(request):
     listx = [1,2,3,4]
-    return render(request, 'CRUDPeg.html',{"listx": listx})
+    return render(request, 'CRUD_Peg.html',{"listx": listx})
 
 ####################PEG METHODS ##################
 
