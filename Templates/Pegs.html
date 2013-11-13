@@ -14,22 +14,10 @@
             return false;
         }
         
-<<<<<<< HEAD
-        function loadCreateBoard()
-        {
-        l=(screen.width-500)/2;
-		t=(screen.height-500)/2;
-        
-            window.open("/Pegs/createboard/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
-            return false;
-        }
-        
-=======
         function test()
         {
          alert("Hello Edit")
         }
->>>>>>> 0935fb75bfb40e5aeea28acaf6050ba436077dac
   </script>
   
 <style type="text/css">
@@ -64,13 +52,8 @@ right:0;
       			  <img name="imgAddPeg" border="0" src="{% static "images/Add_Pin_Text.png" %}" width="200" height="200" onclick="loadSaveForm()">
        		 </a>
 			</td>
-			<td align="center">
-			 <a>
-      			  <img name="bulletin-board3" border="0" src="{% static "images/bulletin-board3.jpg" %}" width="200" height="200" onclick="loadCreateBoard()>
-       		 </a>
-			</td>
 		</tr>
-		{% for bookmark in bookmarks %}
+		{% for peg in pegs %}
 		<tr>
 		<td>
 		<a>
@@ -79,13 +62,14 @@ right:0;
 		<img name="editIcon" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="test()">
 		<img name="impPeg" border="0" src="{% static "images/Aqua_Pin.png" %}" width="200" height="200"><br/>
 		</div>
-		<figcaption align="center">{{bookmark.bookmarkname}}</figcaption>
+		<figcaption align="center">{{peg.name}}</figcaption>
 		</figure>
 		</a>
 		</td>
 		</tr>
 		{% endfor %}
 	</table>
+	<input id="boardid" type="hidden" value={{boardid}} name="boardid" ></input>
 	</form>
 </body>
 </html>

@@ -4,14 +4,12 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Board(models.Model):
-    Board_id = models.IntegerField(unique=True)
     Board_name = models.CharField(max_length=200,unique=True)
     user = models.ForeignKey(User)
     Board_des =  models.CharField(max_length=64)    
 
            
 class Peg(models.Model):
-    Peg_id = models.IntegerField(unique=True)
     name = models.CharField(max_length=64, unique=True)
     url = models.URLField(unique=True)
     image = models.CharField(max_length=64)

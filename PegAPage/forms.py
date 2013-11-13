@@ -7,7 +7,7 @@ Contains all forms
 from django import forms
 from Tkinter import *
 
-class BookmarkCreateForm(forms.Form):
+class PegCreateForm(forms.Form):
     url = forms.URLField(
         label='URL',
         widget=forms.TextInput(attrs={'size': 64})
@@ -16,8 +16,7 @@ class BookmarkCreateForm(forms.Form):
         label='Name',
         widget=forms.TextInput(attrs={'size': 64})
     )
-    pegs = forms.CharField(
-        label='Pegs',
-        required=False,
+    desc = forms.CharField(
+        label='Description',
         widget=forms.TextInput(attrs={'size': 64})
     )
