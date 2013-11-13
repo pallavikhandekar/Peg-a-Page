@@ -46,6 +46,7 @@ def loadPeg(request):
 
 def deletePeg(request):
     print "delete"
+    return HttpResponse("Peg Deleted")
     
 def updatePeg(request):
     url = request.POST['url']

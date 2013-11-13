@@ -9,19 +9,24 @@
         {
         l=(screen.width-500)/2;
 		t=(screen.height-500)/2;
-        
-            window.open("/Pegs/createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+		document.getElementById("mode").value="Add";
+            window.open("createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
             return false;
         }
         
-        function test()
+        function setEditMode()
         {
-         alert("Hello Edit")
+        	
+        	l=(screen.width-500)/2;
+    		t=(screen.height-500)/2;
+         document.getElementById("mode").value="Edit";
+         window.open("createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+        
         }
   </script>
   
 <style type="text/css">
-div
+.parentimage
 {
 position:relative;
 display:inline;
@@ -36,13 +41,13 @@ right:0;
  
 </head>
 <body>
-<div style="background-color:#A7EEF6">
+<div style="background-color: aqua;">
   <h1 align="center">Peg A Page
   <img align="right" src="http://designsinmylocket.files.wordpress.com/2012/12/smiley-face.jpg" height="42" width="42"></img>
 </h1>
 </div>
 <h4 align="right">Welcome pallavi</h4>
-<form id="crudPeg" action="/Pegs/createPeg/" method="post">
+<form id="crudPeg" action="/createPeg/" method="post">
 {% csrf_token %}
 	{% load staticfiles %}
 	<table>
@@ -58,8 +63,8 @@ right:0;
 		<td>
 		<a>
 		<figure>
-		<div>
-		<img name="editIcon" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="test()">
+		<div class="parentimage">
+		<img name="editIcon" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="setEditMode()">
 		<img name="impPeg" border="0" src="{% static "images/Aqua_Pin.png" %}" width="200" height="200"><br/>
 		</div>
 		<figcaption align="center">{{peg.name}}</figcaption>
@@ -70,6 +75,7 @@ right:0;
 		{% endfor %}
 	</table>
 	<input id="boardid" type="hidden" value={{boardid}} name="boardid" ></input>
+	<input id="mode" type="hidden" value="Add" name="mode" ></input>
 	</form>
 </body>
 </html>

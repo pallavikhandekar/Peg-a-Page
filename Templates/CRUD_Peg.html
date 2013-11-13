@@ -4,24 +4,42 @@
 <meta charset="UTF-8">
 <title>Add Peg</title>
 <script type="text/javascript">
-	window.onload = function(){
-	var pw = parent.window;
-	if(pw){
-		var inputform = pw.document.forms['inputform1'];
-		var name = inputform.elements['boardname'].value
-		document.getElementsByName("board").text = name
+	function initializeForm(){
+	if(window.opener){
+		var name =  window.opener.document.getElementById('boardid').value;
+		document.getElementById("board").text = name;
 		
+		var mode = window.opener.document.getElementById('mode').value;
+		document.getElementById("actionButton").value=mode;
+		
+		if(mode == 'Edit')
+			{
+			document.getElementById("deleteButton").style.visibility = "visible";
+			
+			}
+		else
+			{
+			document.getElementById("deleteButton").style.visibility = "hidden";
+			
+			}
+			
 	}
+	else
+		{alert("else")}
+	
 	}
         
   </script>
 </head>
-<body>
-<form id="savebookmark" method="post" action="/Pegs/createPeg/">
+<body onload="initializeForm();">
+<form id="savebookmark" method="post" action="/deletePeg/">
 {% csrf_token %}
   <div align="center"><label id="board" name="board"></label></div>
   {{ form.as_p }}
-  <input type="submit" value="Add">
+  <div>
+  <input id="actionButton" type="submit" name="actionButton" value="" onclick="this.form.action='/Pegs/createPeg/'"> 
+  <input id="deleteButton" style="visibility: hidden;" type="submit" name="deleteButton" value="Delete" onclick="this.form.action='/Pegs/deletePeg/'">
+  </div>
 </form>
 </body>
 </html>
