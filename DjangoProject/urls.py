@@ -6,6 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
                        (r'^DjangoProject/', 'PegAPage.views.load'),
-                       (r'^save/$', 'PegAPage.views.bookmark_save_page'),
-                       (r'^createPeg/$', 'PegAPage.views.bookmark_save_page'),
-                       (r'^Pegs/$', 'PegAPage.views.loadPeg'))
+                       (r'^save/$', 'PegAPage.views.create_bookmarks'),
+                       (r'Pegs/$', 'PegAPage.views.loadPeg'),
+                       (r'Pegs/createPeg/$', 'PegAPage.views.create_bookmarks'),
+                       (r'Pegs/deletePeg/$', 'PegAPage.views.deletePeg'))

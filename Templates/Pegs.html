@@ -10,7 +10,7 @@
         l=(screen.width-500)/2;
 		t=(screen.height-500)/2;
         
-            window.open("/save/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+            window.open("/Pegs/createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
             return false;
         }
   </script>
@@ -22,7 +22,7 @@
 </h1>
 </div>
 <h4 align="right">Welcome pallavi</h4>
-<form id="crudPeg" action="/createPeg/" method="post">
+<form id="crudPeg" action="/Pegs/createPeg/" method="post">
 {% csrf_token %}
 	{% load staticfiles %}
 	<table>

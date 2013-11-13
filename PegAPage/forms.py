@@ -7,13 +7,13 @@ Contains all forms
 from django import forms
 from Tkinter import *
 
-class BookmarkSaveForm(forms.Form):
+class BookmarkCreateForm(forms.Form):
     url = forms.URLField(
         label='URL',
         widget=forms.TextInput(attrs={'size': 64})
     )
-    title = forms.CharField(
-        label='Title',
+    name = forms.CharField(
+        label='Name',
         widget=forms.TextInput(attrs={'size': 64})
     )
     pegs = forms.CharField(
@@ -21,7 +21,3 @@ class BookmarkSaveForm(forms.Form):
         required=False,
         widget=forms.TextInput(attrs={'size': 64})
     )
-    def browse(self):
-        print "browse"
-    btnBrowse = Button(text='Browse',command= browse).pack()
-    

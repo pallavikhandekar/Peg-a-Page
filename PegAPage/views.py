@@ -10,9 +10,9 @@ def load(request):
 
 ####################PEG METHODS ##################
 
-def bookmark_save_page(request):
+def create_bookmarks(request):
     if request.method == 'POST':
-        form = BookmarkSaveForm(request.POST)
+        form = BookmarkCreateForm(request.POST)
         if form.is_valid():
             print "VALID"
             # Create or get link.
@@ -24,7 +24,7 @@ def bookmark_save_page(request):
             user=User.objects.get(id=1),
             link=link )
             # Update bookmark title.
-            bookmark.bookmarkname = form.cleaned_data['title']
+            bookmark.bookmarkname = form.cleaned_data['name']
             # If the bookmark is being updated, clear old tag list.
             if not created:
                 bookmark.peg_set.clear()
@@ -39,19 +39,19 @@ def bookmark_save_page(request):
             return HttpResponse("Peg Saved")
         else:
             print "INVALID"
-            form = BookmarkSaveForm()
+            form = BookmarkCreateForm()
             variables = RequestContext(request, {'form': form})
-            return render_to_response('bookmark_save.html', variables)
+            return render_to_response('CRUD_Peg.html', variables)
     else:
         print "VALID LOad"
-        form = BookmarkSaveForm()
+        form = BookmarkCreateForm()
         variables = RequestContext(request, {'form': form})
-        return render_to_response('bookmark_save.html', variables)
+        return render_to_response('CRUD_Peg.html', variables)
     
 def loadPeg(request):
     bookmarks = Bookmark.objects.filter(user_id=1)
     listofbookmarks = [bk for bk in bookmarks] 
-    return render(request,'CRUDPeg.html',{'bookmarks':listofbookmarks})
+    return render(request,'Pegs.html',{'bookmarks':listofbookmarks})
 
 def deletePeg(request):
     delBookmark= Bookmark.objects.filter(id=request.POST['id'])
@@ -61,7 +61,7 @@ def updatePeg(request):
     url = request.POST['url']
     title = request.POST['title']
     peg = request.POST['peg']
-    form = BookmarkSaveForm({
+    form = BookmarkCreateForm({
          'url': url,
          'title': title,
          'pegs': peg
@@ -78,7 +78,7 @@ def updatePeg(request):
             user=User.objects.get(id=1),
             link=link )
             # Update bookmark title.
-            bookmark.bookmarkname = form.cleaned_data['title']
+            bookmark.bookmarkname = form.cleaned_data['name']
             # If the bookmark is being updated, clear old tag list.
             if not created:
                 bookmark.peg_set.clear()

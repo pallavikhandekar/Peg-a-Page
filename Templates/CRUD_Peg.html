@@ -9,7 +9,7 @@
   </script>
 </head>
 <body>
-<form id="savebookmark" method="post" action="/createPeg/">
+<form id="savebookmark" method="post" action="/Pegs/createPeg/">
 {% csrf_token %}
   {{ form.as_p }}
   <input type="submit" value="Add">
