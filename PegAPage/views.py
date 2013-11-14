@@ -6,7 +6,7 @@ from django.http.response import HttpResponse
 # Create your views here.
 def load(request):
     listx = [1,2,3,4]
-    return render(request, 'CRUDPeg.html',{"listx": listx})
+    return render(request, 'CRUD_Peg.html',{"listx": listx})
 
 ####################PEG METHODS ##################
 
@@ -73,3 +73,33 @@ def updatePeg(request):
     return HttpResponse("Peg Updated")
     
 #################### END PEG METHODS ##################
+
+#Board methods#
+def create_board(request):
+    if request.method == 'POST':
+        form = BoardCreateForm(request.POST)
+        if form.is_valid():
+            print "VALID"
+            # Create Board
+            board, dummy = Board.objects.get_or_create(
+                Board_name = form.cleaned_data['bname'],
+                user_id = "1",                
+                Board_des = form.cleaned_data['bdesc']
+            )
+            mmboard= Board.objects.get(id = 1)
+           
+            mmboard.save()
+                #boardname = request.POST['boardname']            
+         
+            return HttpResponse("Board Saved")
+        else:
+            print "INVALID"
+            form = BoardCreateForm()
+            variables = RequestContext(request, {'form': form})
+            return render_to_response('CRUD_Board.html', variables)   
+    else:
+        print "VALID Load"
+        form = BoardCreateForm()
+        variables = RequestContext(request, {'form': form})
+        return render_to_response('CRUD_Board.html', variables)
+    

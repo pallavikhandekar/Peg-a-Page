@@ -19,4 +19,14 @@ class PegCreateForm(forms.Form):
     desc = forms.CharField(
         label='Description',
         widget=forms.TextInput(attrs={'size': 64})
-    )
+)
+    
+class BoardCreateForm(forms.Form):    
+        bname = forms.CharField(
+        label='Board_Name',
+        widget=forms.TextInput(attrs={'size': 64})
+        )
+        bdesc = forms.CharField(
+        label='Board_Description',
+        widget=forms.TextInput(attrs={'size': 64})
+)
