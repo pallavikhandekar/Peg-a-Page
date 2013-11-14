@@ -19,6 +19,7 @@
         	
         	l=(screen.width-500)/2;
     		t=(screen.height-500)/2;
+    		document.getElementById("pegid").value=document.getElementById("impPeg").name;
          document.getElementById("mode").value="Edit";
          window.open("createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
         
@@ -65,7 +66,7 @@ right:0;
 		<figure>
 		<div class="parentimage">
 		<img name="editIcon" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="setEditMode()">
-		<img name="impPeg" border="0" src="{% static "images/Aqua_Pin.png" %}" width="200" height="200"><br/>
+		<img id=impPeg name={{peg.id}}  border="0" src="{% static "images/Aqua_Pin.png" %}" width="200" height="200"><br/>
 		</div>
 		<figcaption align="center">{{peg.name}}</figcaption>
 		</figure>
@@ -75,6 +76,7 @@ right:0;
 		{% endfor %}
 	</table>
 	<input id="boardid" type="hidden" value={{boardid}} name="boardid" ></input>
+	<input id="pegid" type="hidden" value="" name="pegid" ></input>
 	<input id="mode" type="hidden" value="Add" name="mode" ></input>
 	</form>
 </body>

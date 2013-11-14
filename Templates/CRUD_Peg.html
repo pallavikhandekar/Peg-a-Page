@@ -7,11 +7,12 @@
 	function initializeForm(){
 	if(window.opener){
 		var name =  window.opener.document.getElementById('boardid').value;
-		document.getElementById("board").text = name;
+		document.getElementById("boardid").value = name;
 		
 		var mode = window.opener.document.getElementById('mode').value;
 		document.getElementById("actionButton").value=mode;
 		
+		document.getElementById("pegid").value = window.opener.document.getElementById('pegid').value;
 		if(mode == 'Edit')
 			{
 			document.getElementById("deleteButton").style.visibility = "visible";
@@ -40,6 +41,8 @@
   <input id="actionButton" type="submit" name="actionButton" value="" onclick="this.form.action='/Pegs/createPeg/'"> 
   <input id="deleteButton" style="visibility: hidden;" type="submit" name="deleteButton" value="Delete" onclick="this.form.action='/Pegs/deletePeg/'">
   </div>
+  <input id="boardid" name="boardid" type="hidden"></input>
+    <input id="pegid" name="pegid" type="hidden"></input>
 </form>
 </body>
 </html>

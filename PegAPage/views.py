@@ -45,8 +45,20 @@ def loadPeg(request):
     #return HttpResponse("Test")
 
 def deletePeg(request):
-    print "delete"
-    return HttpResponse("Peg Deleted")
+    if request.method == 'POST':
+        board = Board.objects.get(id=request.POST['boardid'])
+        peg = Peg.objects.get(id= request.POST['pegid'])
+        board.peg_set.remove(peg)
+        board.save()
+        peg.delete()
+        peg.save()
+        print "delete"
+        return HttpResponse("Peg Deleted")
+    else:
+        form = PegCreateForm()
+        variables = RequestContext(request, {'form': form})
+        return render_to_response('CRUD_Peg.html', variables)
+   
     
 def updatePeg(request):
     url = request.POST['url']
