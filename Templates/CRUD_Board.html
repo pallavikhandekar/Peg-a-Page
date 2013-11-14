@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Add Board</title>
+<script type="text/javascript">
+	function initializeForm(){
+	if(window.opener){
+		var name =  window.opener.document.getElementById('boardid').value;
+		document.getElementById("boardid").value = name;
+		
+		var mode = window.opener.document.getElementById('mode').value;
+		document.getElementById("actionButton").value=mode;
+		
+		
+		}
+	else
+		{alert("else")}
+	
+	}
+        
+  </script>
+</head>
+<body >
+<form id="saveboard" method="post" onload="initializeForm();">
+{% csrf_token %}
+  <div align="center"> <label id="boardn" name="board_name"></label>  </div>
+ {{ form.as_p }}
+
+ 
+  <div>
+  <input id="actionButton" type="submit" name="actionButton" value="" onclick="this.form.action='/Pegs/createBoard/'"> 
+ 
+  </div>
+   <input id="boardid" name="boardid" type="hidden"></input>
+</form>
+</body>
+</html>
