@@ -14,13 +14,14 @@
             return false;
         }
         
-        function setEditMode()
+        function setEditMode(me)
         {
-        	
+        	var id  = me.id
+        	var pegid = id.substring(id.indexOf("#")+1,id.length);
         	l=(screen.width-500)/2;
     		t=(screen.height-500)/2;
-    		document.getElementById("pegid").value=document.getElementById("impPeg").name;
-         document.getElementById("mode").value="Edit";
+    		document.getElementById("pegid").value=pegid;
+         document.getElementById("mode").value="Update";
          window.open("createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
         
         }
@@ -65,14 +66,17 @@ right:0;
 		<a>
 		<figure>
 		<div class="parentimage">
-		<img name="editIcon" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="setEditMode()">
-		<img id=impPeg name={{peg.id}}  border="0" src="{% static "images/Aqua_Pin.png" %}" width="200" height="200"><br/>
+		<img id="editIcon#{{peg.id}}" name="{{peg.id}}" border="0" src="{% static 'images/edit-icon.png' %}" width="40" height="40" class="imtip" onclick="setEditMode(this);">
+		<img id=impPeg name="{{peg.id}}"  border="0" src="{% static 'images/Aqua_Pin.png' %}" width="200" height="200"><br/>
 		</div>
 		<figcaption align="center">{{peg.name}}</figcaption>
 		</figure>
 		</a>
 		</td>
 		</tr>
+		<input id="pegurl#{{peg.id}}" type="hidden" value="{{peg.url}}" name="pegurl#{{peg.id}}" ></input>
+		<input id="pegname#{{peg.id}}" type="hidden" value="{{peg.name}}" name="pegname#{{peg.id}}" ></input>
+		<input id="pegdesc#{{peg.id}}" type="hidden" value="{{peg.peg_des}}" name="pegdesc#{{peg.id}}" ></input>
 		{% endfor %}
 	</table>
 	<input id="boardid" type="hidden" value={{boardid}} name="boardid" ></input>

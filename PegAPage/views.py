@@ -51,7 +51,6 @@ def deletePeg(request):
         board.peg_set.remove(peg)
         board.save()
         peg.delete()
-        peg.save()
         print "delete"
         return HttpResponse("Peg Deleted")
     else:
@@ -62,13 +61,15 @@ def deletePeg(request):
     
 def updatePeg(request):
     url = request.POST['url']
-    title = request.POST['title']
-    peg = request.POST['peg']
-    form = PegCreateForm({
-         'url': url,
-         'title': title,
-         'pegs': peg
-         })
+    name = request.POST['name']
+    desc = request.POST['desc']
+    peg = Peg.objects.get(id= request.POST['pegid'])
+    peg.url = url
+    peg.name = name
+    peg.peg_des = desc
+    peg.save()
+    print desc
     print "update"
+    return HttpResponse("Peg Updated")
     
 #################### END PEG METHODS ##################

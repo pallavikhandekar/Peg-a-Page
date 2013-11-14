@@ -13,17 +13,21 @@
 		document.getElementById("actionButton").value=mode;
 		
 		document.getElementById("pegid").value = window.opener.document.getElementById('pegid').value;
-		if(mode == 'Edit')
+		pegid = document.getElementById("pegid").value
+		if(mode == 'Update')
 			{
 			document.getElementById("deleteButton").style.visibility = "visible";
-			
+			//Populating edit form :)
+			document.getElementById("id_url").value = window.opener.document.getElementById('pegurl#'+pegid).value
+			document.getElementById("id_name").value = window.opener.document.getElementById('pegname#'+pegid).value
+			document.getElementById("id_desc").value = window.opener.document.getElementById('pegdesc#'+pegid).value
 			}
 		else
 			{
 			document.getElementById("deleteButton").style.visibility = "hidden";
 			
 			}
-			
+	
 	}
 	else
 		{alert("else")}
@@ -38,11 +42,11 @@
   <div align="center"><label id="board" name="board"></label></div>
   {{ form.as_p }}
   <div>
-  <input id="actionButton" type="submit" name="actionButton" value="" onclick="this.form.action='/Pegs/createPeg/'"> 
+  <input id="actionButton" type="submit" name="actionButton" value="" onclick="if(value=='Add'){this.form.action='/Pegs/createPeg/'} else {this.form.action='/Pegs/updatePeg/'}"> 
   <input id="deleteButton" style="visibility: hidden;" type="submit" name="deleteButton" value="Delete" onclick="this.form.action='/Pegs/deletePeg/'">
   </div>
   <input id="boardid" name="boardid" type="hidden"></input>
-    <input id="pegid" name="pegid" type="hidden"></input>
+  <input id="pegid" name="pegid" type="hidden"></input>
 </form>
 </body>
 </html>
