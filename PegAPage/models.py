@@ -16,3 +16,9 @@ class Peg(models.Model):
     peg_des =  models.CharField(max_length=64)
     
     boards = models.ManyToManyField(Board)
+    
+class Comments(models.Model):
+    comments_desc = models.CharField(max_length=64)
+    user = models.ForeignKey(User)
+    board = models.ForeignKey(Board)
+    peg = models.ForeignKey(Peg)

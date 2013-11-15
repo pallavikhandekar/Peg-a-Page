@@ -30,3 +30,9 @@ class BoardCreateForm(forms.Form):
         label='Board_Description',
         widget=forms.TextInput(attrs={'size': 64})
 )
+        
+class CommentPegForm(forms.Form):
+        commentdesc = forms.CharField(
+        label='Comment Here',
+        widget=forms.TextInput(attrs={'size':64})
+        )

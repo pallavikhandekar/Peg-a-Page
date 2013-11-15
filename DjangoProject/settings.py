@@ -73,7 +73,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "./Peg-a-Page/static",
+    "/home/laxmipratyusha/git/Peg-a-Page2/static",
 )
 
 # List of finder classes that know how to find static files in
@@ -111,7 +111,7 @@ WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    "./Peg-a-Page/Templates"
+    "/home/laxmipratyusha/git/Peg-a-Page2/Templates"
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )

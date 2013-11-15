@@ -35,7 +35,18 @@
             window.open("createBoard/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
             return false;
         }
-        
+         
+         function commentPeg(me)
+         {
+        	 var id  = me.id
+         	var pegid = id.substring(id.indexOf("#")+1,id.length);
+         	l=(screen.width-500)/2;
+     		t=(screen.height-500)/2;
+     		document.getElementById("pegid").value=document.getElementById("impPeg").name;
+     		//alert(document.getElementById("pegid").value);
+          document.getElementById("mode").value="Edit";
+          window.open("commentPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+         }
   </script>
   
 <style type="text/css">
@@ -78,6 +89,7 @@ right:0;
 		<figure>
 		<div class="parentimage">
 		<img id="editIcon#{{peg.id}}" name="{{peg.id}}" border="0" src="{% static 'images/edit-icon.png' %}" width="40" height="40" class="imtip" onclick="setEditMode(this);">
+		<img id="commentIcon#{{peg.id}}" name="{{pegid}}" align="left" border="0" src="{% static "images/comment.png" %}"  width="40" height="40" class="imtip" onclick="commentPeg(this);">
 		<img id=impPeg name="{{peg.id}}"  border="0" src="{% static 'images/Aqua_Pin.png' %}" width="200" height="200"><br/>
 		</div>
 		<figcaption align="center">{{peg.name}}</figcaption>

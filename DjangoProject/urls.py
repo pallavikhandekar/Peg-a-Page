@@ -11,4 +11,5 @@ urlpatterns = patterns('',
                        (r'Pegs/createPeg/$', 'PegAPage.views.create_peg'),
                        (r'Pegs/deletePeg/$', 'PegAPage.views.deletePeg'),
                        (r'Pegs/updatePeg/$', 'PegAPage.views.updatePeg'),
-                       (r'Pegs/createBoard/$', 'PegAPage.views.create_board'))
+                       (r'Pegs/createBoard/$', 'PegAPage.views.create_board'),
+                       (r'Pegs/commentPeg/$', 'PegAPage.views.commentPeg'))
