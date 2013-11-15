@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Comment Peg</title>
+<script type="text/javascript">
+	function initializeForm(){
+	if(window.opener){
+		var name =  window.opener.document.getElementById('boardid').value;
+		document.getElementById("boardid").value = name;
+		
+		//var name_user =  window.opener.document.getElementById('userid').value;
+		document.getElementById("userid").value = 1;
+		//document.getElementById("userid").value = window.opener.document.getElementById('userid').value;
+		var name_peg =  window.opener.document.getElementById('pegid').value;
+		document.getElementById("pegid").value = name_peg;
+		//document.getElementById("pegid").value = window.opener.document.getElementById('pegid').value;
+		//alert("name_peg value"+name_peg);
+			
+	}
+	else
+		{alert("else")}
+	
+	}
+        
+  </script>
+</head>
+<body onload="initializeForm();">
+<form id="savebookmark" method="post" action="Pegs/commentPeg/">
+{% csrf_token %}
+  <div align="center"><label id="board" name="board"></label></div>
+ {{ form.as_p }} 
+  <div>
+  <input id="actionButton" type="submit" name="actionButton" value="save" > 
+   </div>
+  <input id="boardid" name="boardid" type="hidden"></input>
+    <input id="pegid" name="pegid" type="hidden"></input>
+    <input id="userid" name="userid" type="hidden"></input>
+</form>
+</body>
+</html>
