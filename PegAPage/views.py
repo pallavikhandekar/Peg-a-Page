@@ -40,10 +40,17 @@ def create_peg(request):
 def loadPeg(request):
     board = Board.objects.get(id=1)
     pegs =board.peg_set.all()
-    listofPegs = [peg for peg in pegs] 
+    listofPegs = [peg for peg in pegs]    
     return render(request,'Pegs.html',{'pegs':listofPegs,'boardid':board.id})
     #return HttpResponse("Test")
 
+def loadUI(request):
+    board = Board.objects.get(id=1)
+    pegs =board.peg_set.all()
+    listofPegs = [peg for peg in pegs]    
+    return render(request,'Boards.html',{'pegs':listofPegs,'boardid':board.id})
+    #return HttpResponse("Test")
+    
 def deletePeg(request):
     if request.method == 'POST':
         board = Board.objects.get(id=request.POST['boardid'])
@@ -122,4 +129,31 @@ def create_board(request):
         form = BoardCreateForm()
         variables = RequestContext(request, {'form': form})
         return render_to_response('CRUD_Board.html', variables)
-    
+ 
+def pegitPeg(request):
+    if request.method == 'POST':
+        form = PegItForm(request.POST)
+        if form.is_valid():
+            print "VALID"
+            # Create Peg
+            peg, dummy = Peg.objects.get_or_create(
+                url = request.POST['url'],         #form.cleaned_data['url'],
+                name = request.POST['name'], #form.cleaned_data['name'],
+                peg_des = request.POST['desc'], #form.cleaned_data['desc']
+                boards = request.POST['bname']
+            )
+            myboard = Board.objects.get(id = 1)
+            #boardname = request.POST['boardname']
+            myboard.peg_set.add(peg)
+            myboard.save()
+            return HttpResponse("RePegged")
+        else:
+            print "INVALID"
+            form = PegItForm()
+            variables = RequestContext(request, {'form': form})
+            return render_to_response('PegIt.html', variables)
+    else:
+        print "VALID LOad"
+        form = PegItForm()
+        variables = RequestContext(request, {'form': form})
+        return render_to_response('PegIt.html', variables)

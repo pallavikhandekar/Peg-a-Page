@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Peg It</title>
+<script type="text/javascript">
+	function initializeForm(){
+	if(window.opener){
+		var name =  window.opener.document.getElementById('boardid').value;
+		document.getElementById("boardid").value = name;
+		
+		//var mode = window.opener.document.getElementById('mode').value;
+		//document.getElementById("actionButton").value=mode;
+		
+		document.getElementById("pegid").value = window.opener.document.getElementById('pegid').value;
+		pegid = document.getElementById("pegid").value
+		document.getElementById("boardid").value = window.opener.document.getElementById('boardid').value;
+		boardid = document.getElementById("boardid").value
+		
+			document.getElementById("id_url").value = window.opener.document.getElementById('pegurl#'+pegid).value
+			document.getElementById("id_name").value = window.opener.document.getElementById('pegname#'+pegid).value
+			document.getElementById("id_desc").value = window.opener.document.getElementById('pegdesc#'+pegid).value
+	
+	}
+	else
+		{alert("else")}
+	
+	}
+        
+  
+
+</script>
+</head>
+<body onload="initializeForm();">
+<form id="savebookmark" method="post" action="/pegitPeg/">
+{% csrf_token %}
+  <div align="center"><label id="board" name="board"></label></div>
+ {{ form.as_p }} 
+  <div>
+  <input id="actionButton" type="submit" name="actionButton" value="pegIt"  onclick="this.form.action='/Pegs/pegitPeg/'"> 
+   </div>
+  <input id="boardid" name="boardid" type="hidden"></input>
+    <input id="pegid" name="pegid" type="hidden"></input>
+    <input id="userid" name="userid" type="hidden"></input>
+</form>
+</body>
+</html>

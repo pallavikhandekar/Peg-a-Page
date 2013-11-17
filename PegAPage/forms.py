@@ -36,3 +36,21 @@ class CommentPegForm(forms.Form):
         label='Comment Here',
         widget=forms.TextInput(attrs={'size':64})
         )
+        
+class PegItForm(forms.Form):
+    url = forms.URLField(
+        label='URL',
+        widget=forms.TextInput(attrs={'size': 64})
+    )
+    name = forms.CharField(
+        label='Name',
+        widget=forms.TextInput(attrs={'size': 64})
+    )
+    desc = forms.CharField(
+        label='Description',
+        widget=forms.TextInput(attrs={'size': 64})
+    )
+    bname = forms.CharField(
+        label='Board_Name',
+        widget=forms.TextInput(attrs={'size': 64})        
+)

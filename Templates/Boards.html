@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Peg A Page</title>
+ <script type="text/javascript">
+       
+        function loadSaveForm()
+        {
+        l=(screen.width-500)/2;
+		t=(screen.height-500)/2;
+		document.getElementById("mode").value="Add";
+            window.open("createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+            return false;
+        }
+        
+       
+    
+         function loadSaveBoard()
+        {
+        l=(screen.width-500)/2;
+		t=(screen.height-500)/2;
+		document.getElementById("mode").value="Add";
+            window.open("/Pegs/createBoard/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+            return false;
+        }
+  
+         
+ //        }
+  </script>
+  
+<style type="text/css">
+
+</style>
+
+ 
+</head>
+<body>
+<div style="background-color: aqua;">
+  <h1 align="center">Peg A Page
+  <img align="right" src="http://designsinmylocket.files.wordpress.com/2012/12/smiley-face.jpg" height="42" width="42"></img>
+</h1>
+</div>
+<h4 align="center">Welcome User</h4>
+<form id="crudPeg" action="/Pegs/" method="post">
+{% csrf_token %}
+{% load staticfiles %}
+	<table>
+		<tr align="center">
+			<td align="center">
+			 <a>
+      			  <input id="actionButton" type="submit"  value="Add Pegs" onclick='/Pegs/'>	
+       		 </a>
+			</td>
+		</tr>
+		
+		{% for peg in pegs %}
+		<tr>
+		<td align="center">
+		 
+			 <a>
+      			  <img name="imgAddBoard" border="0" src="{% static "images/Add_Board.jpg" %}" width="200" height="200" onclick="loadSaveBoard()">
+       		 </a>
+       		 
+			</td>
+		</tr>
+		<input id="pegurl#{{peg.id}}" type="hidden" value="{{peg.url}}" name="pegurl#{{peg.id}}" ></input>
+		<input id="pegname#{{peg.id}}" type="hidden" value="{{peg.name}}" name="pegname#{{peg.id}}" ></input>
+		<input id="pegdesc#{{peg.id}}" type="hidden" value="{{peg.peg_des}}" name="pegdesc#{{peg.id}}" ></input>
+		{% endfor %}
+	</table>
+	<input id="boardid" type="hidden" value={{boardid}} name="boardid" ></input>
+	<input id="pegid" type="hidden" value="" name="pegid" ></input>
+	<input id="mode" type="hidden" value="Add" name="mode" ></input>
+	</form>
+	
+</body>
+</html>

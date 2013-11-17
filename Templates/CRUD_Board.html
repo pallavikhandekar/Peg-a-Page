@@ -11,8 +11,6 @@
 		
 		var mode = window.opener.document.getElementById('mode').value;
 		document.getElementById("actionButton").value=mode;
-		
-		
 		}
 	else
 		{alert("else")}
@@ -29,7 +27,7 @@
 
  
   <div>
-  <input id="actionButton" type="submit" name="actionButton" value="" onclick="this.form.action='/Pegs/createBoard/'"> 
+  <input id="actionButton" type="submit" name="actionButton" value="Add Board" onclick="this.form.action='/Pegs/createBoard/'"> 
  
   </div>
    <input id="boardid" name="boardid" type="hidden"></input>
