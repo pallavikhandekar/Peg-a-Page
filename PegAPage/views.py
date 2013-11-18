@@ -3,6 +3,7 @@ from PegAPage.models import *
 from PegAPage.forms import *
 from django.http.response import HttpResponse
 
+
 # Create your views here.
 def load(request):
     listx = [1,2,3,4]
@@ -21,7 +22,7 @@ def create_peg(request):
                 name = form.cleaned_data['name'],
                 peg_des = form.cleaned_data['desc']
             )
-            myboard = Board.objects.get(id = 1)
+            myboard = Board.objects.get(id = request.POST['boardid'])
             #boardname = request.POST['boardname']
             myboard.peg_set.add(peg)
             myboard.save()
@@ -39,11 +40,14 @@ def create_peg(request):
     
 def loadPeg(request):
     if request.method == 'POST':
-        print  request.POST['bid']
-        board = Board.objects.get(id=request.POST['bid'])
-        pegs =board.peg_set.all()    
-    #return render(request,'Pegs.html',{'pegs':pegs,'boardid':board.id})
-    return HttpResponse("Test")
+        global_boardid=  request.POST['bid']
+        request.session["boardid"] =  global_boardid
+    else:
+        global_boardid=request.session["boardid"]
+    board = Board.objects.get(id=global_boardid)
+    pegs =board.peg_set.all()    
+    return render(request,'Pegs.html',{'pegs':pegs,'boardid':board.id})
+    #return HttpResponse("Test")
 
 def loadUI(request):
     board = Board.objects.get(id=1)
