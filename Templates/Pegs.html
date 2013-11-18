@@ -25,16 +25,8 @@
          document.getElementById("mode").value="Update";
          window.open("createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
         
-        }
-        
-         function loadSaveBoard()
-        {
-        l=(screen.width-500)/2;
-		t=(screen.height-500)/2;
-		document.getElementById("mode").value="Add";
-            window.open("createBoard/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
-            return false;
-        }
+        }       
+       
          
          function commentPeg(me)
          {
@@ -121,11 +113,7 @@ bottom:0;
 		</figure>
 		</a>
 		</td>
-		<td align="center">
-			 <a>
-      			  <img name="imgAddBoard" border="0" src="{% static "images/Add_Board.jpg" %}" width="200" height="200" onclick="loadSaveBoard()">
-       		 </a>
-			</td>
+		
 		</tr>
 		<input id="pegurl#{{peg.id}}" type="hidden" value="{{peg.url}}" name="pegurl#{{peg.id}}" ></input>
 		<input id="pegname#{{peg.id}}" type="hidden" value="{{peg.name}}" name="pegname#{{peg.id}}" ></input>

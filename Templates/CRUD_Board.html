@@ -6,12 +6,29 @@
 <script type="text/javascript">
 	function initializeForm(){
 	if(window.opener){
-		var name =  window.opener.document.getElementById('boardid').value;
-		document.getElementById("boardid").value = name;
+		var name =  window.opener.document.getElementById('bid').value;
+		document.getElementById("bid").value = name;
 		
 		var mode = window.opener.document.getElementById('mode').value;
 		document.getElementById("actionButton").value=mode;
-		}
+		
+		
+		document.getElementById("bid").value = window.opener.document.getElementById('bid').value;
+		bid = document.getElementById("bid").value
+		if(mode == 'Update')
+			{
+			document.getElementById("deleteButton").style.visibility = "visible";
+			//Populating edit form :)			
+			document.getElementById("id_name").value = window.opener.document.getElementById('boardname#'+bid).value
+			document.getElementById("id_desc").value = window.opener.document.getElementById('boarddesc#'+bid).value
+			}
+		else
+			{
+			document.getElementById("deleteButton").style.visibility = "hidden";
+			
+			}
+	
+	}
 	else
 		{alert("else")}
 	
@@ -19,18 +36,16 @@
         
   </script>
 </head>
-<body >
-<form id="saveboard" method="post" onload="initializeForm();">
+<body onload="initializeForm();">
+<form id="saveboard" method="post" action="/deleteBoard/">
 {% csrf_token %}
-  <div align="center"> <label id="boardn" name="board_name"></label>  </div>
- {{ form.as_p }}
-
- 
+ <div align="center"><label id="board" name="board"></label></div>
+  {{ form.as_p }}
   <div>
-  <input id="actionButton" type="submit" name="actionButton" value="Add Board" onclick="this.form.action='/Pegs/createBoard/'"> 
- 
+  <input id="actionButton" type="submit" name="actionButton" value="" onclick="if(value=='Add'){this.form.action='/Boards/createBoard/'} else {this.form.action='/Boards/updateBoard/'}"> 
+  <input id="deleteButton" style="visibility: hidden;" type="submit" name="deleteButton" value="Delete" onclick="this.form.action='/Boards/deleteBoard/'">
   </div>
-   <input id="boardid" name="boardid" type="hidden"></input>
+   <input id="bid" name="bid" type="hidden"></input>
 </form>
 </body>
 </html>

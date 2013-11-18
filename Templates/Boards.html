@@ -3,33 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <title>Peg A Page</title>
- <script type="text/javascript">
-       
-        function loadSaveForm()
+<script type="text/javascript">
+ function loadSaveBoard()
         {
         l=(screen.width-500)/2;
 		t=(screen.height-500)/2;
 		document.getElementById("mode").value="Add";
-            window.open("createPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+            window.open("createBoard/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
             return false;
         }
         
-       
-    
-         function loadSaveBoard()
-        {
-        l=(screen.width-500)/2;
-		t=(screen.height-500)/2;
-		document.getElementById("mode").value="Add";
-            window.open("/Pegs/createBoard/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+        function loadpegform(me)
+        {        	
+        	var id  = me.id
+        	var bid = id.substring(id.indexOf("#")+1,id.length);
+        	l=(screen.width-500)/2;
+    		t=(screen.height-500)/2;
+    		document.getElementById("bid").value=bid;
+            window.open("Pegs/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
             return false;
         }
-  
-         
- //        }
-  </script>
+        
+        
+         function setEditMode(me)
+        {
+        	var id  = me.id
+        	var bid = id.substring(id.indexOf("#")+1,id.length);
+        	l=(screen.width-500)/2;
+    		t=(screen.height-500)/2;
+    		document.getElementById("bid").value=bid;
+         document.getElementById("mode").value="Update";
+         window.open("createBoard/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+        
+        }
+        
+ </script>
   
 <style type="text/css">
+.parentimage
+{
+position:relative;
+display:inline;
+}
+.imtip
+{
+position:absolute;
+right:0;
+}
 
 </style>
 
@@ -41,38 +61,44 @@
   <img align="right" src="http://designsinmylocket.files.wordpress.com/2012/12/smiley-face.jpg" height="42" width="42"></img>
 </h1>
 </div>
-<h4 align="center">Welcome User</h4>
-<form id="crudPeg" action="/Pegs/" method="post">
+<h4 align="right">Welcome pallavi</h4>
+
+
+<form id="crudBoard" action="/loadBoard/" method="post">
 {% csrf_token %}
-{% load staticfiles %}
+	{% load staticfiles %}
 	<table>
-		<tr align="center">
-			<td align="center">
-			 <a>
-      			  <input id="actionButton" type="submit"  value="Add Pegs" onclick='/Pegs/'>	
-       		 </a>
-			</td>
-		</tr>
+		<tr align="center">			
+			{% if boards %}				
+				{% for b in boards %}
+				<td>
+				<figure>
+				<div class="parentimage">
+				<img id="editIcon#{{b.id}}" name="{{b.id}}" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="setEditMode(this);">
+				<img name="imgAddBoard1" border="0" src="{% static "images/Add_Board.jpg" %}" width="200" height="200" onclick="loadpegform(this);">
+			 		
+				</div>
+				<figcaption align="center">{{b.Board_name}}</figcaption>
+				</figure>
+					
+			 		</td>
+			 		<input id="boardname#{{b.id}}" type="hidden" value="{{b.Board_name}}" name="boardname#{{b.id}}" ></input>
+					<input id="boarddesc#{{b.id}}" type="hidden" value="{{b.Board_des}}" name="boarddesc#{{b.id}}" ></input>
 		
-		{% for peg in pegs %}
-		<tr>
-		<td align="center">
-		 
-			 <a>
-      			  <img name="imgAddBoard" border="0" src="{% static "images/Add_Board.jpg" %}" width="200" height="200" onclick="loadSaveBoard()">
-       		 </a>
+ 				{% endfor %}
+ 				
+ 			
+ 			{% endif %}
+			 
+			<td>
+      			  <img name="imgAddBoard" border="0" src="{% static "images/Add_Boards.jpg" %}" width="200" height="200" onclick="loadSaveBoard()">
        		 
 			</td>
-		</tr>
-		<input id="pegurl#{{peg.id}}" type="hidden" value="{{peg.url}}" name="pegurl#{{peg.id}}" ></input>
-		<input id="pegname#{{peg.id}}" type="hidden" value="{{peg.name}}" name="pegname#{{peg.id}}" ></input>
-		<input id="pegdesc#{{peg.id}}" type="hidden" value="{{peg.peg_des}}" name="pegdesc#{{peg.id}}" ></input>
-		{% endfor %}
+		</tr>		
+		
 	</table>
-	<input id="boardid" type="hidden" value={{boardid}} name="boardid" ></input>
-	<input id="pegid" type="hidden" value="" name="pegid" ></input>
+	<input id="bid" type="hidden" value={{bid}} name="bid" ></input>	
 	<input id="mode" type="hidden" value="Add" name="mode" ></input>
 	</form>
-	
 </body>
 </html>

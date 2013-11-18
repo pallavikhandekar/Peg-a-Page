@@ -102,6 +102,7 @@ def commentPeg(request):
 #################### END PEG METHODS ##################
 
 #Board methods#
+#Board methods#
 def create_board(request):
     if request.method == 'POST':
         form = BoardCreateForm(request.POST)
@@ -109,13 +110,14 @@ def create_board(request):
             print "VALID"
             # Create Board
             board, dummy = Board.objects.get_or_create(
-                Board_name = form.cleaned_data['bname'],
+                Board_name = form.cleaned_data['name'],
                 user_id = "1",                
-                Board_des = form.cleaned_data['bdesc']
+                Board_des = form.cleaned_data['desc']
             )
-            mmboard= Board.objects.get(id = 1)
+            Board.save(board)
+            #mmboard= Board.objects.get(id = 1)
            
-            mmboard.save()
+            #mmboard.save()
                 #boardname = request.POST['boardname']            
          
             return HttpResponse("Board Saved")
@@ -129,6 +131,35 @@ def create_board(request):
         form = BoardCreateForm()
         variables = RequestContext(request, {'form': form})
         return render_to_response('CRUD_Board.html', variables)
+    
+def loadBoard(request):
+    boards = Board.objects.all().filter(user = 1)     
+   
+    listofBoards = [b for b in boards] 
+    return render(request,'Boards.html',{'boards':listofBoards})
+    #return HttpResponse("Test")
+    
+def deleteBoard(request):
+    if request.method == 'POST':
+        board = Board.objects.get(id=request.POST['bid'])       
+        board.delete()    
+        print "delete"
+        return HttpResponse("Board Deleted")
+    else:
+        form = BoardCreateForm()
+        variables = RequestContext(request, {'form': form})
+        return render_to_response('CRUD_Board.html', variables)
+
+def updateBoard(request):   
+    name = request.POST['name']
+    desc = request.POST['desc']
+    board = Board.objects.get(id= request.POST['bid'])   
+    board.Board_name = name
+    board.Board_des = desc
+    board.save()
+    print desc
+    print "update"
+    return HttpResponse("Board Updated")
  
 def pegitPeg(request):
     if request.method == 'POST':

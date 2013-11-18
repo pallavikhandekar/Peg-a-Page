@@ -22,11 +22,11 @@ class PegCreateForm(forms.Form):
 )
     
 class BoardCreateForm(forms.Form):    
-        bname = forms.CharField(
+        name = forms.CharField(
         label='Board_Name',
         widget=forms.TextInput(attrs={'size': 64})
         )
-        bdesc = forms.CharField(
+        desc = forms.CharField(
         label='Board_Description',
         widget=forms.TextInput(attrs={'size': 64})
 )
