@@ -20,8 +20,8 @@
         	l=(screen.width-500)/2;
     		t=(screen.height-500)/2;
     		document.getElementById("bid").value=bid;
-            window.open("Pegs/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
-            return false;
+    		document.getElementById("board").action = "Pegs/"
+    		document.getElementById("board").submit()
         }
         
         
@@ -64,7 +64,7 @@ right:0;
 <h4 align="right">Welcome pallavi</h4>
 
 
-<form id="crudBoard" action="/loadBoard/" method="post">
+<form id="board" action="/loadBoard/" method="post">
 {% csrf_token %}
 	{% load staticfiles %}
 	<table>
@@ -75,7 +75,7 @@ right:0;
 				<figure>
 				<div class="parentimage">
 				<img id="editIcon#{{b.id}}" name="{{b.id}}" border="0" src="{% static "images/edit-icon.png" %}" width="40" height="40" class="imtip" onclick="setEditMode(this);">
-				<img name="imgAddBoard1" border="0" src="{% static "images/Add_Board.jpg" %}" width="200" height="200" onclick="loadpegform(this);">
+				<img id="{{b.id}}" name="imgAddBoard1" border="0" src="{% static "images/Add_Board.jpg" %}" width="200" height="200" onclick="loadpegform(this);">
 			 		
 				</div>
 				<figcaption align="center">{{b.Board_name}}</figcaption>
@@ -97,7 +97,7 @@ right:0;
 		</tr>		
 		
 	</table>
-	<input id="bid" type="hidden" value={{bid}} name="bid" ></input>	
+	<input id="bid" type="hidden" value="" name="bid" ></input>	
 	<input id="mode" type="hidden" value="Add" name="mode" ></input>
 	</form>
 </body>

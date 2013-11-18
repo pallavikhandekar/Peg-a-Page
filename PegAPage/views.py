@@ -38,11 +38,12 @@ def create_peg(request):
         return render_to_response('CRUD_Peg.html', variables)
     
 def loadPeg(request):
-    board = Board.objects.get(id=1)
-    pegs =board.peg_set.all()
-    listofPegs = [peg for peg in pegs]    
-    return render(request,'Pegs.html',{'pegs':listofPegs,'boardid':board.id})
-    #return HttpResponse("Test")
+    if request.method == 'POST':
+        print  request.POST['bid']
+        board = Board.objects.get(id=request.POST['bid'])
+        pegs =board.peg_set.all()    
+    #return render(request,'Pegs.html',{'pegs':pegs,'boardid':board.id})
+    return HttpResponse("Test")
 
 def loadUI(request):
     board = Board.objects.get(id=1)
