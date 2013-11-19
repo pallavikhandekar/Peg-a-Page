@@ -37,7 +37,11 @@
   <div align="center"><label id="board" name="board"></label></div>
  {{ form.as_p }} 
   <div>
-  <input id="actionButton" type="submit" name="actionButton" value="pegIt"  onclick="this.form.action='/Pegs/pegitPeg/'"> 
+  <br>
+  <label id="message" style="color:red;">{{message}}</label>
+  <br>
+  <input id="actionButton" type="submit" name="actionButton" value="pegIt"  onclick="this.form.action='/Pegs/pegitPeg/'">
+  
    </div>
   <input id="boardid" name="boardid" type="hidden"></input>
     <input id="pegid" name="pegid" type="hidden"></input>

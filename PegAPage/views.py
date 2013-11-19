@@ -62,7 +62,8 @@ def deletePeg(request):
         peg = Peg.objects.get(id= request.POST['pegid'])
         board.peg_set.remove(peg)
         board.save()
-        peg.delete()
+        if request.session['userid'] != board.user.id:      
+            peg.delete()
         print "delete"
         return HttpResponse("Peg Deleted")
     else:
@@ -139,7 +140,8 @@ def create_board(request):
     
 def loadBoard(request):
     boards = Board.objects.all().filter(user = 1)     
-   
+    #Set session user id
+    request.session['userid'] = 1
     listofBoards = [b for b in boards] 
     return render(request,'Boards.html',{'boards':listofBoards})
     #return HttpResponse("Test")
@@ -167,29 +169,58 @@ def updateBoard(request):
     return HttpResponse("Board Updated")
  
 def pegitPeg(request):
+    userid = request.session['userid']
+    error = "" 
     if request.method == 'POST':
+        boardname =  request.POST['bname']
         form = PegItForm(request.POST)
         if form.is_valid():
             print "VALID"
-            # Create Peg
-            peg, dummy = Peg.objects.get_or_create(
-                url = request.POST['url'],         #form.cleaned_data['url'],
-                name = request.POST['name'], #form.cleaned_data['name'],
-                peg_des = request.POST['desc'], #form.cleaned_data['desc']
-                boards = request.POST['bname']
-            )
-            myboard = Board.objects.get(id = 1)
-            #boardname = request.POST['boardname']
-            myboard.peg_set.add(peg)
-            myboard.save()
-            return HttpResponse("RePegged")
+            found_board = False
+            pegid = request.POST['pegid']
+            originalboardid = request.POST['boardid']
+            board = Board.objects.get(id=originalboardid)
+            oridinaluser_id = board.user.id
+            print oridinaluser_id
+            #Check Board Name:
+            boardOfUser= Board.objects.filter(user_id = userid)
+            for b in boardOfUser:
+                if b.Board_name ==  boardname:
+                    newBoard = b
+                    found_board = True
+                    break
+                
+            if found_board == False:
+                    form = PegItForm()
+                    variables = RequestContext(request, {'form': form,'message':"Error: Incorrect BoardName!"})
+                    return render_to_response('PegIt.html', variables)
+            elif boardname == board.Board_name :
+                    form = PegItForm()
+                    variables = RequestContext(request, {'form': form,'message':"Error: Already on Current Board"})
+                    return render_to_response('PegIt.html', variables)
+            else:        
+                    if userid != oridinaluser_id:
+                        # Create Peg
+                        peg, dummy = Peg.objects.get_or_create(
+                             url = request.POST['url'],         #form.cleaned_data['url'],
+                             name = request.POST['name'], #form.cleaned_data['name'],
+                             peg_des = request.POST['desc'], #form.cleaned_data['desc']
+                            boards = request.POST['bname']
+                        )
+                    else:
+                        peg  = Peg.objects.get(id = pegid)
+                        
+                    myboard = Board.objects.get(id = newBoard.id)
+                    #boardname = request.POST['boardname']
+                    myboard.peg_set.add(peg)
+                    myboard.save()
+                    return HttpResponse("RePegged")
         else:
             print "INVALID"
             form = PegItForm()
             variables = RequestContext(request, {'form': form})
             return render_to_response('PegIt.html', variables)
     else:
-        print "VALID LOad"
         form = PegItForm()
-        variables = RequestContext(request, {'form': form})
+        variables = RequestContext(request, {'form': form,'message':""})
         return render_to_response('PegIt.html', variables)
