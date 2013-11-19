@@ -54,3 +54,8 @@ class PegItForm(forms.Form):
         label='Board_Name',
         widget=forms.TextInput(attrs={'size': 64})        
 )
+class LikeForm(forms.Form):
+	likedesc = forms.CharField(
+	label = 'Like',
+	widget = forms.TextInput(attrs={'size':64})        
+)
