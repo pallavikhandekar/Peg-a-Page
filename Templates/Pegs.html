@@ -98,8 +98,9 @@ bottom:0;
        		 </a>
 			</td>
 		</tr>
+			<tr>
 		{% for peg in pegs %}
-		<tr>
+	
 		<td>
 		<a>
 		<figure>
@@ -114,11 +115,12 @@ bottom:0;
 		</a>
 		</td>
 		
-		</tr>
+		
 		<input id="pegurl#{{peg.id}}" type="hidden" value="{{peg.url}}" name="pegurl#{{peg.id}}" ></input>
 		<input id="pegname#{{peg.id}}" type="hidden" value="{{peg.name}}" name="pegname#{{peg.id}}" ></input>
 		<input id="pegdesc#{{peg.id}}" type="hidden" value="{{peg.peg_des}}" name="pegdesc#{{peg.id}}" ></input>
 		{% endfor %}
+		</tr>
 	</table>
 	<input id="boardid" type="hidden" value={{boardid}} name="boardid" ></input>
 	<input id="pegid" type="hidden" value="" name="pegid" ></input>
