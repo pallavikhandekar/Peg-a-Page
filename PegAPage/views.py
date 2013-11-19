@@ -224,3 +224,25 @@ def pegitPeg(request):
         form = PegItForm()
         variables = RequestContext(request, {'form': form,'message':""})
         return render_to_response('PegIt.html', variables)
+        
+def LikePeg(request):
+    if request.method == 'POST':
+        form = LikeForm(request.POST)
+        if form.is_valid():
+            print "VALID"
+            # Like Peg
+            Like, dummy = Peg.objects.get_or_create(
+                Like_desc = request.POST['likedesc'],         
+                user_id = request.POST['userid'], 
+                board_id = request.POST['boardid'], 
+                peg_id = request.POST['pegid']
+            )
+            #myboard = Board.objects.get(id = 1)
+            like.save()
+            return HttpResponse("liked")
+        else:
+            print "INVALID"
+            form = LikeForm(request.POST)
+            variables = RequestContext(request, {'form': form})
+            return render_to_response('Like.html', variables)
+    
