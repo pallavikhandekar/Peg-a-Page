@@ -17,4 +17,5 @@ urlpatterns = patterns('',
                        (r'Boards/deleteBoard/$', 'PegAPage.views.deleteBoard'),
                        (r'Boards/Pegs/commentPeg/$', 'PegAPage.views.commentPeg'),
                        (r'Boards/Pegs/$', 'PegAPage.views.loadPeg'),
-                       (r'Pegs/pegitPeg/$', 'PegAPage.views.pegitPeg'))
+                       (r'Pegs/pegitPeg/$', 'PegAPage.views.pegitPeg')
+                       (r'Boards/Pegs/LikePeg/$', 'PegAPage.views.LikePeg'))
