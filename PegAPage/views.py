@@ -148,7 +148,8 @@ def loadBoard(request):
     
 def deleteBoard(request):
     if request.method == 'POST':
-        board = Board.objects.get(id=request.POST['bid'])       
+        board = Board.objects.get(id=request.POST['bid'])  
+        Peg.objects.filter(boards = request.POST['bid']).delete()       
         board.delete()    
         print "delete"
         return HttpResponse("Board Deleted")
@@ -238,7 +239,7 @@ def LikePeg(request):
                 peg_id = request.POST['pegid']
             )
             #myboard = Board.objects.get(id = 1)
-            like.save()
+            Like.save()
             return HttpResponse("liked")
         else:
             print "INVALID"
