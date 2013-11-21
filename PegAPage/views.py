@@ -259,11 +259,11 @@ def pegitPeg(request):
         
 def LikePeg(request):
     if request.method == 'POST':
-        form = LikeForm(request.POST)
+        form = LikePegForm(request.POST)
         if form.is_valid():
             print "VALID"
             # Like Peg
-            Like, dummy = Peg.objects.get_or_create(
+            Like, dummy = Like.objects.get_or_create(
                 Like_desc = request.POST['likedesc'],         
                 #user_id = request.POST['userid'], 
                 #board_id = request.POST['boardid'], 
@@ -274,7 +274,7 @@ def LikePeg(request):
             return HttpResponse("liked")
         else:
             print "INVALID"
-            form = LikeForm(request.POST)
+            form = LikePegForm(request.POST)
             variables = RequestContext(request, {'form': form})
             return render_to_response('Like_Peg.html', variables)
     
