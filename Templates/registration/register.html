@@ -1,0 +1,15 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title> Peg-A-Page | User Registration</title>
+	</head>
+	<body>
+		<h1>User Registration</h1>
+		<form method="post" action=".">
+		{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="register" />
+		</form>
+	</body>
+</html>

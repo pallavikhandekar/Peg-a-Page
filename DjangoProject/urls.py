@@ -1,6 +1,9 @@
 from django.conf.urls import patterns
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
+from PegAPage.views import *
+from django.views.generic import TemplateView
+
 
 admin.autodiscover()
 
@@ -18,4 +21,13 @@ urlpatterns = patterns('',
                        (r'Boards/Pegs/commentPeg/$', 'PegAPage.views.commentPeg'),
                        (r'Boards/Pegs/$', 'PegAPage.views.loadPeg'),
                        (r'Pegs/pegitPeg/$', 'PegAPage.views.pegitPeg'),
-                       (r'Boards/Pegs/LikePeg/$', 'PegAPage.views.LikePeg'))
+                       (r'Boards/Pegs/LikePeg/$', 'PegAPage.views.LikePeg'),
+                       (r'^login/$', 'django.contrib.auth.views.login'),
+                       (r'^logout/$', logout_page),
+                       (r'^register/$', register_page),
+                       (r'^register/success/$', TemplateView.as_view(template_name='registration/register_success.html')),
+                       )
+
+
+
+

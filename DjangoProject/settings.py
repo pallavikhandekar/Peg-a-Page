@@ -10,6 +10,11 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
@@ -21,6 +26,7 @@ DATABASES = {
         'PORT': '3306',                      # Set to empty string for default.
     }
 }
+
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -73,7 +79,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "./Peg-a-Page/static",
+    "C:/Users/dgada/git/Peg-a-Page/static",
 )
 
 # List of finder classes that know how to find static files in
@@ -111,7 +117,7 @@ WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    "./Peg-a-Page/Templates"
+    "C:/Users/dgada/git/Peg-a-Page/Templates"
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
