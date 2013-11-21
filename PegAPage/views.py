@@ -265,9 +265,9 @@ def LikePeg(request):
             # Like Peg
             Like, dummy = Peg.objects.get_or_create(
                 Like_desc = request.POST['likedesc'],         
-                user_id = request.POST['userid'], 
-                board_id = request.POST['boardid'], 
-                peg_id = request.POST['pegid']
+                #user_id = request.POST['userid'], 
+                #board_id = request.POST['boardid'], 
+                #peg_id = request.POST['pegid']
             )
             #myboard = Board.objects.get(id = 1)
             Like.save()
@@ -276,5 +276,5 @@ def LikePeg(request):
             print "INVALID"
             form = LikeForm(request.POST)
             variables = RequestContext(request, {'form': form})
-            return render_to_response('Like.html', variables)
+            return render_to_response('Like_Peg.html', variables)
     
