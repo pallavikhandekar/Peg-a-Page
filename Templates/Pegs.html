@@ -51,7 +51,17 @@
         //  document.getElementById("mode").value="Add";
           window.open("pegitPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
          }
-         
+         function LikePeg(me)
+	{
+		var id = me.id
+		var pegid = id.substring(id.indexOf('#')+1,id.length); 
+		l=(screen.width-500)/2;
+                     t=(screen.height-500)/2;
+                     document.getElementById("pegid").value=document.getElementById("impPeg").name;
+                     //alert(document.getElementById("pegid").value);
+          document.getElementById("mode").value="Edit";
+          window.open("LikePeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+         }     
  //        }
   </script>
   
@@ -75,6 +85,11 @@ left:0;
 {
 position:absolute;
 bottom:0;
+}
+.Likeimage
+{
+position:absolute;
+center:0;
 }
 </style>
 
@@ -108,6 +123,7 @@ bottom:0;
 		<img id="editIcon#{{peg.id}}" name="{{peg.id}}" border="0" src="{% static 'images/edit-icon.png' %}" width="40" height="40" class="imtip" onclick="setEditMode(this);">
 		<img id="PegItIcon#{{peg.id}}" name="{{pegid}}" align="bottom" border="0" src="{% static 'images/PegIt.gif' %}"  width="40" height="40" class="PegItimage" onclick="PegIt(this);">
 		<img id="commentIcon#{{peg.id}}" name="{{pegid}}" align="left" border="0" src="{% static "images/comment.png" %}"  width="40" height="40" class="commentimage" onclick="commentPeg(this);">
+		<img id="LikeIcon#{{peg.id}}" name="{{pegid}}" align="center" border="0" src="{% static "images/heart.png" %}"  width="40" height="40" class="Likeimage" onclick="LikePeg(this);">
 		<img id=impPeg name="{{peg.id}}"  border="0" src="{% static 'images/Aqua_Pin.png' %}" width="200" height="200"><br/>
 		</div>
 		<figcaption align="center">{{peg.name}}</figcaption>
