@@ -4,6 +4,8 @@ from django.contrib import admin
 from PegAPage.views import *
 from django.views.generic import TemplateView
 
+import os.path
+site_media = os.path.join(os.path.dirname(__file__), 'site_media')
 
 admin.autodiscover()
 
@@ -26,6 +28,9 @@ urlpatterns = patterns('',
                        (r'^logout/$', logout_page),
                        (r'^register/$', register_page),
                        (r'^register/success/$', TemplateView.as_view(template_name='registration/register_success.html')),
+                       (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',{ 'document_root': site_media }),
+                       (r'^ContactMe/$', contactMe_page),
+                       (r'^PrivacyPolicy/$', privacyPolicy_page),
                        )
 
 

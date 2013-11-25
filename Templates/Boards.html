@@ -1,8 +1,7 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Peg A Page</title>
+{% extends "base.html" %}
+{% block title %}User Registration{% endblock %}
+{% block head %}User Registration{% endblock %}
+
 <script type="text/javascript">
  function loadSaveBoard()
         {
@@ -54,15 +53,7 @@ right:0;
 </style>
 
  
-</head>
-<body>
-<div style="background-color: aqua;">
-  <h1 align="center">Peg A Page
-  <img align="right" src="http://designsinmylocket.files.wordpress.com/2012/12/smiley-face.jpg" height="42" width="42"></img>
-</h1>
-</div>
-<h4 align="right">Welcome pallavi</h4>
-
+{% block content %}
 
 <form id="board" action="/loadBoard/" method="post">
 {% csrf_token %}
@@ -100,5 +91,4 @@ right:0;
 	<input id="bid" type="hidden" value="" name="bid" ></input>	
 	<input id="mode" type="hidden" value="Add" name="mode" ></input>
 	</form>
-</body>
-</html>
+{% endblock %}

@@ -1,14 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
-	<head>
-		<title> Peg-A-Page | Registration Successful</title>
-	</head>
-	<body>
+{% extends "base.html" %}
+{% block title %}User Registration{% endblock %}
+{% block head %}User Registration{% endblock %}
+{% block content %}
 		<h1>Registration Completed Successfully</h1>
 		Thank you for registering. Your information has been
-		saved in the database. Now you can either
-		<a href="/login/">login</a> or go back to the
-		<a href="/Boards/">main page</a>.
-	</body>
-</html>
+		saved in the database.
+{% endblock %}

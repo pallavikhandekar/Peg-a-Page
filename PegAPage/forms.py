@@ -21,7 +21,7 @@ class RegistrationForm(forms.Form):
                                 widget=forms.PasswordInput()
                                 )  
     
-    def cleaned_password2(self):
+    def clean_password2(self):
         if 'password1' in self.cleaned_data:
             password1 = self.cleaned_data['password1']
             password2 = self.cleaned_data['password2']
@@ -29,7 +29,7 @@ class RegistrationForm(forms.Form):
                 return password2
             raise forms.ValidationError('Passwords do not match.')
     
-    def cleaned_username(self):
+    def clean_username(self):
         username = self.cleaned_data['username']
         if not re.search(r'^\w+$', username):
             raise forms.ValidationError('Username can only contain alphanumeric characters and the underscore.')
@@ -38,6 +38,14 @@ class RegistrationForm(forms.Form):
         except ObjectDoesNotExist:
             return username
         raise forms.ValidationError('Username is already taken.')
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        try:
+            User.objects.get(email=email)
+        except ObjectDoesNotExist:
+            return email
+        raise forms.ValidationError('Email is already taken.')
     
     
 

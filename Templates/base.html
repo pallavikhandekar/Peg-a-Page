@@ -1,0 +1,39 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>Peg-A-Page | {% block title %}{% endblock %}</title>
+		<link rel="stylesheet" href="site_media/style.css"	type="text/css" />
+	</head>
+
+	<body>
+	
+		<div id="header" style="background-color: aqua;">
+  			<h1 align="center">Peg A Page <img align="left" src="http://us.123rf.com/400wm/400/400/glopphy/glopphy1109/glopphy110900083/10599305-team-helping-logo.jpg" height="42" width="42"></img>
+			</h1>
+		</div>
+		<div id="nav" align="right">		
+			<a href="/Boards/">home</a> |
+				{% if user.is_authenticated %}
+					welcome {{ user.username }}
+					(<a href="/logout">logout</a>)
+				{% else %}
+					<a href="/login/">login</a> |
+					<a href="/register/">register</a>
+				{% endif %}
+		</div>
+		<div>
+		<h1>{% block head %}{% endblock %}</h1>
+			{% block content %}{% endblock %}
+
+		</div>
+
+
+		<div id="footer" style="background-color:#B0C4DE;">
+  			<h4 align="center"><a href="/ContactMe/"> Contact Me </a>	&nbsp;|&nbsp;	<a href="/PrivacyPolicy/"> Privacy Policy </a>
+			</h4>
+		</div>
+	</body>
+</html>

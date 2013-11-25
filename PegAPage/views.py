@@ -26,13 +26,15 @@ def register_page(request):
             return HttpResponseRedirect('/register/success/')
     else:
         form = RegistrationForm()
-        variables = RequestContext(request, {
-                                             'form': form
-                                             })
-        return render_to_response(
-                                  'registration/register.html',
-                                  variables
-                                  )
+    
+    variables = RequestContext(request, {'form': form })
+    return render_to_response('registration/register.html', variables )
+
+def contactMe_page(request):
+    return render(request, 'ContactMe.html')    
+
+def privacyPolicy_page(request):
+    return render(request, 'PrivacyPolicy.html')      
 
 
 # Create your views here.
