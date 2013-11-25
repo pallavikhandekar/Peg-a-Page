@@ -22,7 +22,7 @@
 </script>
 </head>
 <body onload="initializeForm();">
-<form id="savebookmark" method="post" action="Pegs/LikePeg/">
+<form id="savebookmark" method="post" action="/LikePeg/">
 {% csrf_token %}
   <div align="center"><label id="board" name="board"></label></div>
  {{ form.as_p }} 
