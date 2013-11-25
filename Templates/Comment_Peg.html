@@ -4,38 +4,74 @@
 <meta charset="UTF-8">
 <title>Comment Peg</title>
 <script type="text/javascript">
-	function initializeForm(){
+
+var board_name, peg_name;
+var str='pegname#'+window.opener.document.getElementById('pegid').value;
+peg_name =  window.opener.document.getElementById(str).value;
+board_name =  window.opener.document.getElementById('boardid').value;
+
+function initializeForm(){
 	if(window.opener){
-		var name =  window.opener.document.getElementById('boardid').value;
-		document.getElementById("boardid").value = name;
-		
-		//var name_user =  window.opener.document.getElementById('userid').value;
+		board_name =  window.opener.document.getElementById('boardid').value;
+		document.getElementById("boardid").value = window.opener.document.getElementById('boardid').value;
 		document.getElementById("userid").value = 1;
-		//document.getElementById("userid").value = window.opener.document.getElementById('userid').value;
-		var name_peg =  window.opener.document.getElementById('pegid').value;
-		document.getElementById("pegid").value = name_peg;
-		//document.getElementById("pegid").value = window.opener.document.getElementById('pegid').value;
-		//alert("name_peg value"+name_peg);
-			
+		var str='pegname#'+window.opener.document.getElementById('pegid').value;
+		//alert("str value="+str);
+		peg_name =  window.opener.document.getElementById(str).value;
+		document.getElementById("pegid").value = window.opener.document.getElementById('pegid').value;
+		
+		//alert("name_peg value"+peg_name);
+		//alert("name_board value"+board_name);	
 	}
 	else
 		{alert("else")}
 	
 	}
+	function followBoard()
+	{
+		document.getElementById("ptype").value ="follow";
+		commentform.submit();
+	}
         
   </script>
 </head>
 <body onload="initializeForm();">
-<form id="savebookmark" method="post" action="Pegs/commentPeg/">
+<form id="savebookmark" name="commentform" method="post" action="/Boards/Pegs/commentPeg/">
 {% csrf_token %}
-  <div align="center"><label id="board" name="board"></label></div>
- {{ form.as_p }} 
-  <div>
-  <input id="actionButton" type="submit" name="actionButton" value="save" > 
+	{% load staticfiles %}
+ 		
+		<table>
+		<tr align="center">	
+		
+				<td>
+				<a>
+  				<div align="center"><label id="board" name="board"></label></div>  
+  
+				<figure>
+				<div class="parentimage">
+				<img id=impPeg name="{{peg.id}}"  border="0" src="{% static 'images/Aqua_Pin.png' %}" width="300" height="300">
+				</div>
+				<figcaption align="center"><script >document.write(peg_name);</script></figcaption><br><br>
+				
+				<figcaption align="top"><script>document.write(board_name);</script></figcaption>
+				<div>
+				<img id=impPeg name="{{peg.id}}"  border="0" src="{% static 'images/followBoard.jpeg' %}" width="100" height="100" onclick="followBoard();"> 
+   				</div>
+				</figure>
+				</a>
+				</td>
+				</tr>
+			<tr><td>{{ form.as_p }} </td></tr>
+			<tr><td><input id="actionButton" type="submit" name="actionButton" value="save" ></td></tr>
+	
+	
+<div>
+
    </div>
-  <input id="boardid" name="boardid" type="hidden"></input>
-    <input id="pegid" name="pegid" type="hidden"></input>
-    <input id="userid" name="userid" type="hidden"></input>
+  <input id="boardid" name="boardid" type="hidden"/>
+    <input id="pegid" name="pegid" type="hidden"/>
+    <input id="userid" name="userid" type="hidden"/>
+    <input id="ptype" name="ptype" type="hidden" value="comment"/>
 </form>
 </body>
 </html>
