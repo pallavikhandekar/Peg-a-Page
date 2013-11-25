@@ -5,7 +5,7 @@
 \deftab720
 \pard\pardeftab720\sl360
 
-\f0\fs22 \cf0 \cb1 web:
-\f1 gunicorn -b 0.0.0.0:8000 --pythonpath=./DjangoProject \cb1 DjangoProject\cb1 .wsgi:application
+\f0\fs22 \cf0 web: 
+\f1 gunicorn -b 0.0.0.0:8000 --pythonpath=./DjangoProject DjangoProject.wsgi:application
 \f0 \
 worker: bin/python django_project/manage.py celeryd -E -B --loglevel=INFO}
