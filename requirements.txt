@@ -6,10 +6,10 @@ altgraph==0.10.1
 bdist-mpkg==0.4.4
 distribute==0.7.3
 macholib==1.5
-matplotlib==1.1.1
 modulegraph==0.10.1
 numpy==1.6.2
 pip-tools==0.3.4
+matplotlib==1.1.1
 py2app==0.7.1
 pyOpenSSL==0.13
 pyobjc-core==2.3.2a0
