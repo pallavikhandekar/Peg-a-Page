@@ -7,7 +7,7 @@ bdist-mpkg==0.4.4
 distribute==0.7.3
 macholib==1.5
 modulegraph==0.10.1
-numpy>=1.1
+numpy==1.4
 matplotlib==1.1.1
 pip-tools==0.3.4
 py2app==0.7.1
