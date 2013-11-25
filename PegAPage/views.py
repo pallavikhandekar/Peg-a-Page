@@ -1,6 +1,7 @@
 from django.shortcuts import render,render_to_response,RequestContext,HttpResponseRedirect
 from PegAPage.models import *
 from PegAPage.forms import *
+from PegAPage.BookmarkManager import *
 from django.http.response import HttpResponse
 from django.http import HttpResponse, Http404
 from django.contrib.auth.models import User
@@ -49,16 +50,8 @@ def create_peg(request):
         form = PegCreateForm(request.POST)
         if form.is_valid():
             print "VALID"
-            # Create Peg
-            peg, dummy = Peg.objects.get_or_create(
-                url = form.cleaned_data['url'],
-                name = form.cleaned_data['name'],
-                peg_des = form.cleaned_data['desc']
-            )
-            myboard = Board.objects.get(id = request.POST['boardid'])
-            #boardname = request.POST['boardname']
-            myboard.peg_set.add(peg)
-            myboard.save()
+            boardid = request.POST['boardid']
+            savePeg(form,boardid)
             return HttpResponse("Peg Saved")
         else:
             print "INVALID"
@@ -77,9 +70,8 @@ def loadPeg(request):
         request.session["boardid"] =  global_boardid
     else:
         global_boardid=request.session["boardid"]
-    board = Board.objects.get(id=global_boardid)
-    pegs =board.peg_set.all()    
-    return render(request,'Pegs.html',{'pegs':pegs,'boardid':board.id})
+        pegs = getPegsForBoard(global_boardid)  
+    return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid})
     #return HttpResponse("Test")
 
 def loadUI(request):
@@ -91,18 +83,25 @@ def loadUI(request):
     
 def deletePeg(request):
     if request.method == 'POST':
-        board = Board.objects.get(id=request.POST['boardid'])
-        peg = Peg.objects.get(id= request.POST['pegid'])
-        board.peg_set.remove(peg)
-        board.save()
-        if request.session['userid'] != board.user.id:      
-            peg.delete()
-        print "delete"
+        boardid=request.POST['boardid']
+        pegid = request.POST['pegid']
+        removePegforBoard(boardid,pegid)
+        if request.session['userid'] != getBoard(boardid).user.id:      
+            removePeg() 
         return HttpResponse("Peg Deleted")
     else:
         form = PegCreateForm()
         variables = RequestContext(request, {'form': form})
         return render_to_response('CRUD_Peg.html', variables)
+   
+    
+def editPeg(request):
+    url = request.POST['url']
+    name = request.POST['name']
+    desc = request.POST['desc']
+    pegid = request.POST['pegid']
+    modifyPeg(url,name,desc,pegid)
+    return HttpResponse("Peg Updated")
    
     
 def updatePeg(request):
@@ -137,7 +136,7 @@ def commentPeg(request):
             comment.save()
             return HttpResponse("Comment Saved")
         else:
-            follow, dummy = Follow.objects.get_or_create(
+            follow, dummy=Follow.objects.get_or_create(
             user_id = request.POST['userid'],
             board_id = request.POST['boardid']
                 
