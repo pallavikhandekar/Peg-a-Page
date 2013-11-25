@@ -14,7 +14,7 @@ class Peg(models.Model):
     url = models.URLField(unique=True)
     image = models.CharField(max_length=64)
     peg_des =  models.CharField(max_length=64)
-    Like_desc = models.CharField(max_length=64)
+    #Like_desc = models.CharField(max_length=64)
     boards = models.ManyToManyField(Board)
     
 class Comments(models.Model):
