@@ -4,12 +4,11 @@ PyRSS2Gen==1.0.0
 Twisted==12.2.0
 altgraph==0.10.1
 bdist-mpkg==0.4.4
-bonjour-py==0.3
 distribute==0.7.3
 macholib==1.5
-matplotlib==1.1.1
 modulegraph==0.10.1
-numpy==1.6.2
+numpy>=1.1
+matplotlib==1.1.1
 pip-tools==0.3.4
 py2app==0.7.1
 pyOpenSSL==0.13
