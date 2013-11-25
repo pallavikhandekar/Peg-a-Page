@@ -265,14 +265,14 @@ def LikePeg(request):
         if form.is_valid():
             print "VALID"
             # Like Peg
-            Like, dummy = Like.objects.get_or_create(
-                Like_desc = request.POST['likedesc'],         
+            #Like, dummy = Like.objects.get_or_create(
+                #Like_desc = request.POST['likedesc'],         
                 #user_id = request.POST['userid'], 
                 #board_id = request.POST['boardid'], 
                 #peg_id = request.POST['pegid']
-            )
+            #)
             #myboard = Board.objects.get(id = 1)
-            Like.save()
+            #Like.save()
             return HttpResponse("liked")
         else:
             print "INVALID"
