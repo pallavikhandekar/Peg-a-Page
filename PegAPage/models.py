@@ -22,3 +22,7 @@ class Comments(models.Model):
     user = models.ForeignKey(User)
     board = models.ForeignKey(Board)
     peg = models.ForeignKey(Peg)
+    
+class Follow(models.Model):
+    user = models.ForeignKey(User)
+    board = models.ForeignKey(Board)

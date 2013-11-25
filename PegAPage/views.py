@@ -121,21 +121,34 @@ def updatePeg(request):
 def commentPeg(request):
     #if request.method == 'POST':
     if request.method == 'POST':
+     
         form = CommentPegForm(request.POST)
+        
         #board = Board.objects.get(id=request.POST['boardid'])
         #peg = Peg.objects.get(id= request.POST['pegid'])
         #user = User.objects.get(id= request.POST['userid'])
-        comment, dummy = Comments.objects.get_or_create(
-                comments_desc = request.POST['commentdesc'],
-                user_id = request.POST['userid'],
-                board_id = request.POST['boardid'],
-                peg_id = request.POST['pegid']
-                )
-        comment.save()
-        return HttpResponse("Comment Saved")
+        if request.POST['ptype'] == 'comment' :
+            comment, dummy = Comments.objects.get_or_create(
+                    comments_desc = request.POST['commentdesc'],
+                    user_id = request.POST['userid'],
+                    board_id = request.POST['boardid'],
+                    peg_id = request.POST['pegid']
+                    )
+            comment.save()
+            return HttpResponse("Comment Saved")
+        else:
+            follow, dummy = Follow.objects.get_or_create(
+            user_id = request.POST['userid'],
+            board_id = request.POST['boardid']
+                
+                ) 
+            follow.save()
+            variables = RequestContext(request, {'form': form})
+            return render_to_response('Comment_Peg.html', variables)
     else:    
         form = CommentPegForm(request.POST)
         variables = RequestContext(request, {'form': form})
+   
         return render_to_response('Comment_Peg.html', variables)
     
 #################### END PEG METHODS ##################
