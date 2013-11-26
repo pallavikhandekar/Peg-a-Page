@@ -277,8 +277,8 @@ def LikePeg(request):
         if form.is_valid():
             print "VALID"
             # Like Peg
-            boardid = request.POST['boardid']
-            savePeg(form,boardid)
+            #boardid = request.POST['boardid']
+            #savePeg(form,boardid)
             #Like, dummy = Like.objects.get_or_create(
                 #Like_desc = request.POST['likedesc'],         
                 #user_id = request.POST['userid'], 
