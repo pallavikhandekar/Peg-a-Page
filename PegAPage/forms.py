@@ -97,7 +97,7 @@ class PegItForm(forms.Form):
         widget=forms.TextInput(attrs={'size': 64})        
 )
 class LikePegForm(forms.Form):
- url = forms.URLField(
+    url = forms.URLField(
         label='URL',
         widget=forms.TextInput(attrs={'size': 64})
     )

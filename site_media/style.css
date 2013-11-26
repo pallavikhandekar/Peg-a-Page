@@ -2,8 +2,15 @@
 float: right;
 }
 
-input {
+#input {
 display: block;
 }
 
 
+
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

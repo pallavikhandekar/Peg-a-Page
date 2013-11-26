@@ -15,18 +15,24 @@ MANAGERS = ADMINS
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': 'pegapage',                      # Or path to database file if using sqlite3.
+#        # The following settings are not used with sqlite3:
+#        'USER': 'nimble',
+#        'PASSWORD': 'password',
+#        'HOST': 'ec2-50-19-213-178.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+#        'PORT': '3306',                      # Set to empty string for default.
+#    }
+#}
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'pegapage',                      # Or path to database file if using sqlite3.
-        # The following settings are not used with sqlite3:
-        'USER': 'nimble',
-        'PASSWORD': 'password',
-        'HOST': 'ec2-50-19-213-178.compute-1.amazonaws.com',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
-        'PORT': '3306',                      # Set to empty string for default.
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
@@ -79,8 +85,8 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    #"C:/Users/dgada/git/Peg-a-Page/static",
-    "./Peg-a-Page/static",
+    "C:/Users/dgada/workspace/git/Peg-a-Page/static",
+    #"./Peg-a-Page/static",
 )
 
 # List of finder classes that know how to find static files in
@@ -118,8 +124,8 @@ WSGI_APPLICATION = 'DjangoProject.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    #"C:/Users/dgada/git/Peg-a-Page/Templates"
-    "./Peg-a-Page/Templates"
+    "C:/Users/dgada/workspace/git/Peg-a-Page/Templates"
+    #"./Peg-a-Page/Templates"
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
 )
