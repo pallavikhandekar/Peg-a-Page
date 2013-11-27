@@ -12,7 +12,8 @@
                 pegid = document.getElementById("pegid").value
                 document.getElementById("boardid").value = window.opener.document.getElementById('boardid').value;
                 boardid = document.getElementById("boardid").value
-                
+                document.getElementById("id_url").value = window.opener.document.getElementById('pegurl#'+pegid).value
+                document.getElementById("id_name").value = window.opener.document.getElementById('pegname#'+pegid).value
 		 }
         else
                 {alert("else")}
@@ -21,7 +22,7 @@
 </script>
 </head>
 <body onload="initializeForm();">
-<form id="savebookmark" method="post" action="Pegs/LikePeg/">
+<form id="savebookmark" method="post" action="/LikePeg/">
 {% csrf_token %}
   <div align="center"><label id="board" name="board"></label></div>
  {{ form.as_p }} 

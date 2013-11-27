@@ -1,6 +1,9 @@
-{% extends "base.html" %}
-{% block title %}User Registration{% endblock %}
-{% block head %}User Registration{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Peg A Page</title>
+
 
 <script type="text/javascript">
  function loadSaveBoard()
@@ -49,14 +52,36 @@ display:inline;
 position:absolute;
 right:0;
 }
-
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
 </style>
 
- 
-{% block content %}
 
-<form id="board" action="/loadBoard/" method="post">
-{% csrf_token %}
+</head>
+<body>
+
+		<div id="header" style="background-color: aqua;">
+  			  			<h1 align="center">Peg A Page - Website <img align="center" src="https://lh5.googleusercontent.com/-vc4UjsLVK9s/UpRCymZrn5I/AAAAAAAAHiQ/OPahL_D7Dwk/w116-h82-no/peg+a+page.png" height="60" width="60"></img>
+
+			</h1>
+		</div>
+		<div id="nav" align="right">		
+			<a href="/Boards/">home</a> |
+				{% if user.is_authenticated %}
+					welcome {{ user.username }}
+					(<a href="/logout">logout</a>)
+				{% else %}
+					<a href="/login/">login</a> |
+					<a href="/register/">register</a>
+				{% endif %}
+		</div>
+		
+	<div>
+	<form id="board" action="/loadBoard/" method="post">
+	{% csrf_token %}
 	{% load staticfiles %}
 	<table>
 		<tr align="center">			
@@ -91,4 +116,12 @@ right:0;
 	<input id="bid" type="hidden" value="" name="bid" ></input>	
 	<input id="mode" type="hidden" value="Add" name="mode" ></input>
 	</form>
-{% endblock %}
+	</div>
+	
+			<div class="footer" style="background-color:#B0C4DE;">
+  			<h4 align="center"><a href="/ContactMe/"> Contact Me </a>	&nbsp;|&nbsp;	<a href="/PrivacyPolicy/"> Privacy Policy </a>
+			</h4>
+		</div>
+	
+</body>
+</html>

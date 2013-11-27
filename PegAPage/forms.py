@@ -97,7 +97,11 @@ class PegItForm(forms.Form):
         widget=forms.TextInput(attrs={'size': 64})        
 )
 class LikePegForm(forms.Form):
-	likedesc = forms.CharField(
-	label = 'Like',
-	widget = forms.TextInput(attrs={'size':64})        
-)
+    url = forms.URLField(
+        label='URL',
+        widget=forms.TextInput(attrs={'size': 64})
+    )
+    name = forms.CharField(
+        label='Name',
+        widget=forms.TextInput(attrs={'size': 64})
+    )       

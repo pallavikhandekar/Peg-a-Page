@@ -26,3 +26,9 @@ class Comments(models.Model):
 class Follow(models.Model):
     user = models.ForeignKey(User)
     board = models.ForeignKey(Board)
+    
+class Like(models.Model):
+    Like_desc = models.CharField(max_length=64)
+    user = models.ForeignKey(User)
+    board = models.ForeignKey(Board)
+    peg = models.ForeignKey(Peg)
