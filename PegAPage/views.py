@@ -314,4 +314,4 @@ def SharePeg(request):
 		print "Private"
 		form = SharePegForm()
 		variables = RequestContext(request, {'form':form})
-		return render_to_response('Share_peg.html', variables)
+		return render_to_response('Share_Peg.html', variables)
