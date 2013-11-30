@@ -31,6 +31,7 @@ urlpatterns = patterns('',
                        (r'^site_media/(?P<path>.*)$', 'django.views.static.serve',{ 'document_root': site_media }),
                        (r'^ContactMe/$', contactMe_page),
                        (r'^PrivacyPolicy/$', privacyPolicy_page),
+                       (r'Pegs/SharePeg/$', 'PegAPage.views.SharePeg'),
                        )
 
 
