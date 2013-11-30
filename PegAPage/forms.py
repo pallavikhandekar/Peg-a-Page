@@ -105,3 +105,14 @@ class LikePegForm(forms.Form):
         label='Name',
         widget=forms.TextInput(attrs={'size': 64})
     )       
+    
+class SharePegForm(forms.Form):
+    url = forms.URLField(
+        label='URL',
+        widget=forms.TextInput(attrs={'size': 64})
+    )
+    name = forms.CharField(
+        label='Name',
+        widget=forms.TextInput(attrs={'size': 64})
+    )
+     
