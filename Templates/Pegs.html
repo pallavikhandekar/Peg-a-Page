@@ -95,7 +95,11 @@ bottom:0;
 position:absolute;
 center:0;
 }
-
+.Shareimage
+{
+position:absolute;
+bottom:0;
+}
 	
 </style>
 
@@ -134,7 +138,7 @@ center:0;
 			{% endif %}
 		{% endfor %}
 		<img id=impPeg name="{{peg.id}}"  border="0" src="{% static 'images/Aqua_Pin.png' %}" width="200" height="200" onclick="commentPeg(this);">
-		
+		<img id="ShareIcon#{{peg.id}}" name="{{pegid}}" align="bottom" border="0" src="{% static value %}"  width="40" height="40" class="Shareimage" onclick="SharePeg(this);">
 		</div>
 		<figcaption align="center">{{peg.name}}</figcaption>
 		</figure>
