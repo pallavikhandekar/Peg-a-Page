@@ -281,17 +281,10 @@ def LikePeg(request):
             #savePeg(form,boardid)
             #Like, dummy = Like.objects.get_or_create(
                 #Like_desc = request.POST['likedesc'],         
-<<<<<<< HEAD
-                user_id = request.POST['userid'], 
-                board_id = request.POST['boardid'], 
-                peg_id = request.POST['pegid']
-            )
-=======
                 #user_id = request.POST['userid'], 
                 #board_id = request.POST['boardid'], 
                 #peg_id = request.POST['pegid']
             #)
->>>>>>> 8f8985f1466b418dd39e9debe185b2e82b0f5046
             #myboard = Board.objects.get(id = 1)
             #Like.save()
             return HttpResponse("liked")
