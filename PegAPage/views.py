@@ -284,7 +284,7 @@ def LikePeg(request):
                 user_id = request.POST['userid'], 
                 board_id = request.POST['boardid'], 
                 peg_id = request.POST['pegid']
-            #)
+            )
             #myboard = Board.objects.get(id = 1)
             Like.save()
             return HttpResponse("liked")
@@ -300,17 +300,17 @@ def LikePeg(request):
         return render_to_response('Like_Peg.html', variables)
         
 def SharePeg(request):
-	if request.method == 'POST':
-	form = SharePegForm(request.POST)
-	if form.is_valid():
-		print "public"
-		return HttpResponse("Peg Shared")
-	else:
-		print "Invalid"
-		form = SharePegForm()
-		variables = RequestContext(request, {'form':form})
-		return render_to_response('Share_peg.html', variables)
-	else:
+    if request.method == 'POST':
+        form = SharePegForm(request.POST)
+        if form.is_valid():
+            print "public"
+            return HttpResponse("Peg Shared")
+        else:
+		    print "Invalid"
+		    form = SharePegForm()
+		    variables = RequestContext(request, {'form':form})
+		    return render_to_response('Share_peg.html', variables)
+    else:
 		print "Private"
 		form = SharePegForm()
 		variables = RequestContext(request, {'form':form})
