@@ -47,17 +47,7 @@
      		document.getElementById("pegid").value = pegid;	
           window.open("pegitPeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
          }
-        /*  function LikePeg(me)
-	{
-		var id = me.id
-		var pegid = id.substring(id.indexOf('#')+1,id.length); 
-		l=(screen.width-500)/2;
-                     t=(screen.height-500)/2;
-                     document.getElementById("pegid").value=document.getElementById("impPeg").name;
-                     //alert(document.getElementById("pegid").value);
-          document.getElementById("mode").value="Edit";
-          window.open("LikePeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
-         } */
+       
          function LikePeg(me)
          {
         	 var id = me.id
@@ -73,7 +63,7 @@
                     t=(screen.height-500)/2;
                     document.getElementById("pegid").value=id;    // document.getElementById("impPeg").name;
                     //document.getElementById("mode").value="Edit";
-                 window.open("SharePeg/", "littleWindow", "location=no,width=1000,height=750,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
+                 window.open("SharePeg/", "littleWindow", "location=no,width=500,height=250,titlebar=no,directories=no,status=no,menubar=no,left="+l+",top="+t);
         }
 
  //        }
@@ -142,7 +132,11 @@ bottom:0;
 		<div class="parentimage">
 		<img id="editIcon#{{peg.id}}" name="{{peg.id}}" border="0" src="{% static 'images/edit-icon.png' %}" width="40" height="40" class="imtip" onclick="setEditMode(this);">
 		<img id="PegItIcon#{{peg.id}}" name="{{pegid}}" align="bottom" border="0" src="{% static 'images/PegIt.gif' %}"  width="40" height="40" class="PegItimage" onclick="PegIt(this);">
-		<img id="LikeIcon#{{peg.id}}" name="{{pegid}}" align="center" border="0" src="{% static 'images/gray_heart.png' %}"  width="40" height="40" class="Likeimage" onclick="LikePeg(this);"> 
+	    {% for key, value in liked.items %}
+			{% if key == peg.id %}
+					<img id="LikeIcon#{{peg.id}}" name="{{pegid}}" align="center" border="0" src="{% static value %}"  width="40" height="40" class="Likeimage" onclick="LikePeg(this);">
+			{% endif %}
+		{% endfor %}
 		<img id=impPeg name="{{peg.id}}"  border="0" src="{% static 'images/Aqua_Pin.png' %}" width="200" height="200" onclick="commentPeg(this);">
 		<img id="ShareIcon#{{peg.id}}" name="{{pegid}}" align="bottom" border="0" src="{% static 'images/share.png' %}"  width="40" height="40" class="Shareimage" onclick="SharePeg(this);">
 		</div>
