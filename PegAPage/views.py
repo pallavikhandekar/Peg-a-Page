@@ -71,14 +71,14 @@ def loadPeg(request):
         request.session["boardid"] = global_boardid
     else:
         global_boardid=request.session["boardid"]
-        pegs = getPegsForBoard(global_boardid)  
-        liked = {}
-        for peg in pegs:
-            isliked = Like.objects.filter(peg_id__exact=peg.id).filter(board_id__exact=global_boardid)
-            if isliked.exists():
-                liked[peg.id] = "images/heart.png"
-            else:
-                liked[peg.id] = "images/gray_heart.png" 
+    pegs = getPegsForBoard(global_boardid)  
+    liked = {}
+    for peg in pegs:
+        isliked = Like.objects.filter(peg_id__exact=peg.id).filter(board_id__exact=global_boardid)
+        if isliked.exists():
+            liked[peg.id] = "images/heart.png"
+        else:
+            liked[peg.id] = "images/gray_heart.png" 
       
     return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid, 'liked':liked})
 
