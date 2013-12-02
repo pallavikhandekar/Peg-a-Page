@@ -51,7 +51,7 @@ def create_peg(request):
         form = PegCreateForm(request.POST)
         if form.is_valid():
             print "VALID"
-            boardid = 1# request.POST['boardid']
+            boardid = request.POST['boardid']
             savePeg(form,boardid)
             return HttpResponse("Peg Saved")
         else:
