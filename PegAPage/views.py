@@ -69,9 +69,22 @@ def loadPeg(request):
         global_boardid=  request.POST['bid']
         request.session["boardid"] = global_boardid
     else:
-        global_boardid=1 #request.session["boardid"]
+        global_boardid=1#request.session["boardid"]
         pegs = getPegsForBoard(global_boardid)  
-    return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid})
+        liked = {}
+        for peg in pegs:
+            isliked = Like.objects.filter(peg_id__exact=peg.id).filter(board_id__exact=global_boardid)
+            if isliked.exists():
+                liked[peg.id] = True
+            
+        #=======================================================================
+        # for peg in pegs:
+        #     isliked = Like.objects.filter(peg_id = peg.id).filter(board_id = global_boardid).filter(user_id = 1)
+        #     if isliked != None:
+        #         print "liked"
+        #         liked[peg.id] = True
+        #=======================================================================
+    return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid, 'liked':liked})
     #return HttpResponse("Test")
 
 def loadUI(request):
