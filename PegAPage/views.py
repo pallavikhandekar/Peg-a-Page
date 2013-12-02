@@ -69,7 +69,7 @@ def loadPeg(request):
         global_boardid=  request.POST['bid']
         request.session["boardid"] = global_boardid
     else:
-        global_boardid=1#request.session["boardid"]
+        global_boardid=request.session["boardid"]
         pegs = getPegsForBoard(global_boardid)  
         liked = {}
         for peg in pegs:
