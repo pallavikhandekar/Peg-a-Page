@@ -50,7 +50,7 @@ def create_peg(request):
         form = PegCreateForm(request.POST)
         if form.is_valid():
             print "VALID"
-            boardid = request.POST['boardid']
+            boardid = 1# request.POST['boardid']
             savePeg(form,boardid)
             return HttpResponse("Peg Saved")
         else:
@@ -67,11 +67,19 @@ def create_peg(request):
 def loadPeg(request):
     if request.method == 'POST':
         global_boardid=  request.POST['bid']
-        request.session["boardid"] =  global_boardid
+        request.session["boardid"] = global_boardid
     else:
         global_boardid=request.session["boardid"]
         pegs = getPegsForBoard(global_boardid)  
-    return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid})
+        liked = {}
+        for peg in pegs:
+            isliked = Like.objects.filter(peg_id__exact=peg.id).filter(board_id__exact=global_boardid)
+            if isliked.exists():
+                liked[peg.id] = "images/heart.png"
+            else:
+                liked[peg.id] = "images/gray_heart.png" 
+      
+    return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid, 'liked':liked})
     #return HttpResponse("Test")
 
 def loadUI(request):
@@ -272,10 +280,8 @@ def pegitPeg(request):
         return render_to_response('PegIt.html', variables)
         
 def LikePeg(request):
-    if request.method == 'POST':
-        form = LikePegForm(request.POST)
-        if form.is_valid():
             print "VALID"
+<<<<<<< HEAD
             # Like Peg
             #boardid = request.POST['boardid']
             #savePeg(form,boardid)
@@ -298,20 +304,39 @@ def LikePeg(request):
         form = LikePegForm()
         variables = RequestContext(request, {'form': form})
         return render_to_response('Like_Peg.html', variables)
+=======
+          
+            #Like Peg
+            like, created = Like.objects.get_or_create(        
+                user_id = request.POST['userid'], 
+                board_id = request.POST['boardid'], 
+                peg_id = request.POST['pegid']
+            )
+            if created == False and like is not None:
+                like.delete()
+            else:
+                like.save()
+                
+            return HttpResponseRedirect('/Pegs/')
+           
+>>>>>>> 82a8ec404fff1a826079427c8e16cd6346e9d485
         
 def SharePeg(request):
-    if request.method == 'POST':
-        form = SharePegForm(request.POST)
-        if form.is_valid():
-            print "public"
-            return HttpResponse("Peg Shared")
-        else:
-		    print "Invalid"
-		    form = SharePegForm()
-		    variables = RequestContext(request, {'form':form})
-		    return render_to_response('Share_peg.html', variables)
-    else:
-		print "Private"
-		form = SharePegForm()
-		variables = RequestContext(request, {'form':form})
-		return render_to_response('Share_Peg.html', variables)
+    return HttpResponse("Feature Coming soon!!!")
+  #=============================================================================
+  #   if request.method == 'POST':
+  #       form = SharePegForm(request.POST)
+  #       if form.is_valid():
+  #           print "public"
+  #           return HttpResponse("Peg Shared")
+  #       else:
+		#     print "Invalid"
+		#     form = SharePegForm()
+		#     variables = RequestContext(request, {'form':form})
+		#     return render_to_response('Share_peg.html', variables)
+  #   else:
+		# print "Private"
+		# form = SharePegForm()
+		# variables = RequestContext(request, {'form':form})
+		# return render_to_response('Share_Peg.html', variables)
+		#=============================================================================
