@@ -75,15 +75,10 @@ def loadPeg(request):
         for peg in pegs:
             isliked = Like.objects.filter(peg_id__exact=peg.id).filter(board_id__exact=global_boardid)
             if isliked.exists():
-                liked[peg.id] = True
-            
-        #=======================================================================
-        # for peg in pegs:
-        #     isliked = Like.objects.filter(peg_id = peg.id).filter(board_id = global_boardid).filter(user_id = 1)
-        #     if isliked != None:
-        #         print "liked"
-        #         liked[peg.id] = True
-        #=======================================================================
+                liked[peg.id] = "images/heart.png"
+            else:
+                liked[peg.id] = "images/gray_heart.png" 
+      
     return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid, 'liked':liked})
     #return HttpResponse("Test")
 
@@ -288,13 +283,18 @@ def LikePeg(request):
             print "VALID"
           
             #Like Peg
-            like, dummy = Like.objects.get_or_create(        
+            like, created = Like.objects.get_or_create(        
                 user_id = request.POST['userid'], 
                 board_id = request.POST['boardid'], 
                 peg_id = request.POST['pegid']
             )
-            like.save()
-            return HttpResponse("liked")
+            if created == False and like is not None:
+                like.delete()
+            else:
+                like.save()
+                
+            return HttpResponseRedirect('/Pegs/')
+           
         
 def SharePeg(request):
     if request.method == 'POST':
