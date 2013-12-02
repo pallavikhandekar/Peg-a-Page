@@ -2,6 +2,7 @@ from django.shortcuts import render,render_to_response,RequestContext,HttpRespon
 from PegAPage.models import *
 from PegAPage.forms import *
 from PegAPage.BookmarkManager import *
+from PegAPage.BoardManager import *
 from django.http.response import HttpResponse
 from django.http import HttpResponse, Http404
 from django.contrib.auth.models import User
@@ -78,8 +79,8 @@ def loadPeg(request):
                 liked[peg.id] = "images/heart.png"
             else:
                 liked[peg.id] = "images/gray_heart.png" 
-      
-    return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid, 'liked':liked})
+    pegs = getPegsForBoard(global_boardid)    
+    return render(request,'Pegs.html',{'pegs':pegs,'boardid':global_boardid})
     #return HttpResponse("Test")
 
 def loadUI(request):
@@ -161,24 +162,14 @@ def commentPeg(request):
 #################### END PEG METHODS ##################
 
 #Board methods#
-#Board methods#
 def create_board(request):
     if request.method == 'POST':
         form = BoardCreateForm(request.POST)
         if form.is_valid():
             print "VALID"
             # Create Board
-            board, dummy = Board.objects.get_or_create(
-                Board_name = form.cleaned_data['name'],
-                user_id = "1",                
-                Board_des = form.cleaned_data['desc']
-            )
-            Board.save(board)
-            #mmboard= Board.objects.get(id = 1)
-           
-            #mmboard.save()
-                #boardname = request.POST['boardname']            
-         
+            userid = '1'
+            saveboard(form,userid) 
             return HttpResponse("Board Saved")
         else:
             print "INVALID"
@@ -192,19 +183,18 @@ def create_board(request):
         return render_to_response('CRUD_Board.html', variables)
     
 def loadBoard(request):
-    boards = Board.objects.all().filter(user = 1)     
+       
     #Set session user id
     request.session['userid'] = 1
+    global_user = request.session['userid']
+    boards = getBoardsForUser(global_user) 
     listofBoards = [b for b in boards] 
     return render(request,'Boards.html',{'boards':listofBoards})
     #return HttpResponse("Test")
     
 def deleteBoard(request):
     if request.method == 'POST':
-        board = Board.objects.get(id=request.POST['bid'])  
-        Peg.objects.filter(boards = request.POST['bid']).delete()       
-        board.delete()    
-        print "delete"
+        removeboard(request.POST['bid'])
         return HttpResponse("Board Deleted")
     else:
         form = BoardCreateForm()
@@ -214,12 +204,7 @@ def deleteBoard(request):
 def updateBoard(request):   
     name = request.POST['name']
     desc = request.POST['desc']
-    board = Board.objects.get(id= request.POST['bid'])   
-    board.Board_name = name
-    board.Board_des = desc
-    board.save()
-    print desc
-    print "update"
+    updateboard(request.POST['bid'],name,desc)    
     return HttpResponse("Board Updated")
  
 def pegitPeg(request):
@@ -280,8 +265,11 @@ def pegitPeg(request):
         return render_to_response('PegIt.html', variables)
         
 def LikePeg(request):
+     if request.method == 'POST':   
+        form = LikePegForm()
+        if form.is_valid():
             print "VALID"
-<<<<<<< HEAD
+#<<<<<<< HEAD
             # Like Peg
             #boardid = request.POST['boardid']
             #savePeg(form,boardid)
@@ -290,7 +278,7 @@ def LikePeg(request):
                 user_id = request.POST['userid'], 
                 board_id = request.POST['boardid'], 
                 peg_id = request.POST['pegid']
-            #)
+            )
             #myboard = Board.objects.get(id = 1)
             Like.save()
             return HttpResponse("liked")
@@ -299,27 +287,30 @@ def LikePeg(request):
             form = LikePegForm(request.POST)
             variables = RequestContext(request, {'form': form})
             return render_to_response('Like_Peg.html', variables)
-    else:
-        print "VALID Like"
-        form = LikePegForm()
-        variables = RequestContext(request, {'form': form})
-        return render_to_response('Like_Peg.html', variables)
-=======
-          
-            #Like Peg
-            like, created = Like.objects.get_or_create(        
+     else:
+         print "VALID Like"
+         form = LikePegForm()
+         variables = RequestContext(request, {'form': form})
+         return render_to_response('Like_Peg.html', variables)
+     
+     #Like Peg
+     like, created = Like.objects.get_or_create(        
                 user_id = request.POST['userid'], 
                 board_id = request.POST['boardid'], 
                 peg_id = request.POST['pegid']
             )
-            if created == False and like is not None:
-                like.delete()
-            else:
-                like.save()
-                
-            return HttpResponseRedirect('/Pegs/')
+     
+     if created == False and like is not None:
+           like.delete()
+     else:
+           like.save()                
+           return HttpResponseRedirect('/Pegs/')
+
+          
+            
+            
            
->>>>>>> 82a8ec404fff1a826079427c8e16cd6346e9d485
+
         
 def SharePeg(request):
     return HttpResponse("Feature Coming soon!!!")
