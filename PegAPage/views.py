@@ -167,7 +167,7 @@ def create_board(request):
         if form.is_valid():
             print "VALID"
             # Create Board
-            userid = '1'
+            userid = request.session['userid']
             saveboard(form,userid) 
             return HttpResponse("Board Saved")
         else:
