@@ -2,7 +2,6 @@ from django.shortcuts import render,render_to_response,RequestContext,HttpRespon
 from PegAPage.models import *
 from PegAPage.forms import *
 from PegAPage.BookmarkManager import *
-from PegAPage.BoardManager import *
 from django.http.response import HttpResponse
 from django.http import HttpResponse, Http404
 from django.contrib.auth.models import User
