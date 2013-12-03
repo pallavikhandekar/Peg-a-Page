@@ -103,12 +103,22 @@ right:0;
  
 </head>
 <body>
-<div style="background-color: aqua;">
-  <h1 align="center">Peg A Page
-  <img align="right" src="http://designsinmylocket.files.wordpress.com/2012/12/smiley-face.jpg" height="42" width="42"></img>
-</h1>
-</div>
-<h4 align="right">Welcome pallavi</h4>
+
+<div id="header" style="background-color: aqua;">
+  			  			<h1 align="center">Peg A Page - Website <img align="center" src="https://lh5.googleusercontent.com/-vc4UjsLVK9s/UpRCymZrn5I/AAAAAAAAHiQ/OPahL_D7Dwk/w116-h82-no/peg+a+page.png" height="60" width="60"></img>
+
+			</h1>
+		</div>
+		<div id="nav" align="right">		
+			<a href="/Boards/">home</a> |
+				{% if user.is_authenticated %}
+					welcome {{ user.username }}
+					(<a href="/logout">logout</a>)
+				{% else %}
+					<a href="/login/">login</a> |
+					<a href="/register/">register</a>
+				{% endif %}
+		</div>
 <form id="crudPeg" action="/createPeg/" method="post">
 {% csrf_token %}
 	{% load staticfiles %}
