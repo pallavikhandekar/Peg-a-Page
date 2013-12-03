@@ -184,7 +184,8 @@ def create_board(request):
 def loadBoard(request):
        
     #Set session user id
-    request.session['userid'] = 1
+    userid = User.objects.get(username__exact='nimble').id
+    request.session['userid'] = userid
     global_user = request.session['userid']
     boards = getBoardsForUser(global_user) 
     listofBoards = [b for b in boards] 
